@@ -8,16 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #110F1C;
+            background-color: #0D0B14;
             color: #f8fafc; /* slate-50 */
         }
         .slide {
             display: none;
-            min-height: 80vh;
+            min-height: 85vh;
             opacity: 0;
             transition: opacity 0.7s ease-in-out;
             position: absolute;
@@ -37,75 +37,82 @@
         .slide-container {
             position: relative;
             width: 100%;
-            min-height: 80vh;
+            min-height: 85vh;
         }
         .chart-container {
             position: relative;
-            height: 18rem; /* h-72 */
             width: 100%;
         }
-        /* Custom gradient text */
         .gradient-text {
-            background: linear-gradient(to right, #A455FF, #7B42F6);
+            background: linear-gradient(to right, #C879FF, #9B51E0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .card {
-            background-color: #1C1A27;
-            border: 1px solid #2A2835;
+            background-color: #1A1823;
+            border: 1px solid #2C2A37;
             border-radius: 1rem;
             padding: 2rem;
             height: 100%;
         }
         .primary-button {
-             background-color: #7B42F6;
+             background: linear-gradient(to right, #C879FF, #9B51E0);
              color: white;
         }
         .primary-button:hover {
-            background-color: #A455FF;
+            opacity: 0.9;
+        }
+        .secondary-button {
+            background-color: #1A1823;
+            border: 1px solid #2C2A37;
+            color: white;
+        }
+        .secondary-button:hover {
+            background-color: #2C2A37;
         }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
 
-    <div class="w-full max-w-6xl mx-auto bg-[#161422] rounded-2xl shadow-2xl overflow-hidden border border-[#2A2835]">
+    <div class="w-full max-w-7xl mx-auto bg-[#13111B] rounded-2xl shadow-2xl overflow-hidden border border-[#2C2A37]">
         <main class="p-4 sm:p-8 md:p-12">
             <div id="slide-container" class="slide-container">
-                <!-- Slide 1: Title -->
+                
+                <!-- Slide 1: Main Title -->
                 <div id="slide-1" class="slide active text-center">
                     <h1 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">WiseOne</h1>
                     <h2 class="mt-4 text-2xl md:text-3xl font-bold text-slate-100">Crypto's First KOL Audit & Performance Platform</h2>
-                    <p class="mt-6 text-lg md:text-xl text-slate-300">Stop Guessing. Start Knowing. We replace vanity metrics with verifiable proof of impact.</p>
+                    <p class="mt-6 text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">Stop Guessing. Start Knowing. We replace vanity metrics with verifiable proof of impact.</p>
                 </div>
 
                 <!-- Slide 2: The Problem -->
                 <div id="slide-2" class="slide">
-                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">The Problem: <span class="text-red-400">Chaos in Crypto Marketing</span></h2>
+                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">The Problem: <span style="color: #f87171;">Chaos in Crypto Marketing</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
                         <div class="card text-center flex flex-col items-center">
                             <svg class="w-16 h-16 mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
                             <h3 class="text-xl font-bold mb-2">Deceptive Metrics</h3>
-                            <p class="text-slate-300">Fake followers and botted engagement create a false reality.</p>
+                            <p class="text-slate-400">Fake followers and botted engagement create a false reality.</p>
                         </div>
                         <div class="card text-center flex flex-col items-center">
                             <svg class="w-16 h-16 mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
                             <h3 class="text-xl font-bold mb-2">Wasted Capital</h3>
-                            <p class="text-slate-300">Millions burned on ineffective campaigns with no real attribution.</p>
+                            <p class="text-slate-400">Millions burned on ineffective campaigns with no real attribution.</p>
                         </div>
                         <div class="card text-center flex flex-col items-center">
                              <svg class="w-16 h-16 mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <h3 class="text-xl font-bold mb-2">No Accountability</h3>
-                            <p class="text-slate-300">KOLs delete posts, erasing proof of work and leaving you with nothing.</p>
+                            <p class="text-slate-400">KOLs delete posts, erasing proof of work and leaving you with nothing.</p>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Slide 3: Fake Influence -->
                 <div id="slide-3" class="slide text-center">
                     <h2 class="text-3xl md:text-5xl font-bold mb-6">This Is How Easy It Is to Fake Influence</h2>
                     <p class="text-slate-400 mb-8 max-w-2xl mx-auto">The video below demonstrates how easily engagement metrics can be manipulated, creating a deceptive appearance of influence and reach.</p>
-                    <div class="w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-[#2A2835]">
-                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/110F1C/A455FF?text=Click+to+Play+Video">
+                    <div class="w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-[#2C2A37]">
+                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/0D0B14/C879FF?text=Click+to+Play+Video">
                             <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20%281%29.mov" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -117,33 +124,42 @@
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">The Solution: <span class="gradient-text">Real Impact Verification</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
                          <div class="card text-center flex flex-col items-center">
-                            <svg class="w-16 h-16 mb-4 text-[#A455FF]" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="16" cy="16" r="2.5"></circle><circle cx="16" cy="6" r="2"></circle><circle cx="16" cy="26" r="2"></circle><circle cx="6" cy="16" r="2"></circle><circle cx="26" cy="16" r="2"></circle><circle cx="9.9" cy="9.9" r="2"></circle><circle cx="22.1" cy="22.1" r="2"></circle><circle cx="9.9" cy="22.1" r="2"></circle><circle cx="22.1" cy="9.9" r="2"></circle>
-                            </svg>
+                            <svg class="w-16 h-16 mb-4 text-[#C879FF]" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="2.5"></circle><circle cx="16" cy="6" r="2"></circle><circle cx="16" cy="26" r="2"></circle><circle cx="6" cy="16" r="2"></circle><circle cx="26" cy="16" r="2"></circle><circle cx="9.9" cy="9.9" r="2"></circle><circle cx="22.1" cy="22.1" r="2"></circle><circle cx="9.9" cy="22.1" r="2"></circle><circle cx="22.1" cy="9.9" r="2"></circle></svg>
                             <h3 class="text-xl font-bold mb-2">Proprietary AI</h3>
-                            <p class="text-slate-300">Detect fake engagement and track historical performance with unmatched accuracy.</p>
+                            <p class="text-slate-400">Detect fake engagement and track historical performance with unmatched accuracy.</p>
                         </div>
                         <div class="card text-center flex flex-col items-center">
-                            <svg class="w-16 h-16 mb-4 text-[#A455FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            <svg class="w-16 h-16 mb-4 text-[#C879FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             <h3 class="text-xl font-bold mb-2">Actionable Data</h3>
-                            <p class="text-slate-300">Move beyond vanity metrics to verifiable ROI and make informed decisions.</p>
+                            <p class="text-slate-400">Move beyond vanity metrics to verifiable ROI and make informed decisions.</p>
                         </div>
                         <div class="card text-center flex flex-col items-center">
-                           <svg class="w-16 h-16 mb-4 text-[#A455FF]" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.3158 31.9167C26.3158 32.5481 25.9195 33.3958 25.2105 33.75L12.1053 41.25C11.0526 41.875 9.63158 41.0278 9.63158 39.7917V24.5C9.63158 23.8681 10.0278 23.0208 10.7368 22.6667L23.8421 15.1667C24.8947 14.5417 26.3158 15.3889 26.3158 16.625V31.9167Z" stroke="currentColor" stroke-width="3"></path>
-                                <path d="M40.3684 22.6667L27.2632 15.1667C26.2105 14.5417 24.7895 15.3889 24.7895 16.625V31.9167C24.7895 32.5481 25.1857 33.3958 25.8947 33.75L38.9999 41.25C40.0526 41.875 41.4737 41.0278 41.4737 39.7917V24.5C41.4737 23.8681 41.0774 23.0208 40.3684 22.6667Z" stroke="currentColor" stroke-width="3"></path>
-                                <path d="M33.3421 3.75L20.2368 11.25C19.1842 11.875 19.1842 13.375 20.2368 14L33.3421 21.5C34.3947 22.125 35.8158 21.2778 35.8158 20.0417V5.16667C35.8158 3.93056 34.3947 3.125 33.3421 3.75Z" stroke="currentColor" stroke-width="3"></path>
-                            </svg>
+                           <svg class="w-16 h-16 mb-4 text-[#C879FF]" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.3158 31.9167C26.3158 32.5481 25.9195 33.3958 25.2105 33.75L12.1053 41.25C11.0526 41.875 9.63158 41.0278 9.63158 39.7917V24.5C9.63158 23.8681 10.0278 23.0208 10.7368 22.6667L23.8421 15.1667C24.8947 14.5417 26.3158 15.3889 26.3158 16.625V31.9167Z" stroke="currentColor" stroke-width="3"></path><path d="M40.3684 22.6667L27.2632 15.1667C26.2105 14.5417 24.7895 15.3889 24.7895 16.625V31.9167C24.7895 32.5481 25.1857 33.3958 25.8947 33.75L38.9999 41.25C40.0526 41.875 41.4737 41.0278 41.4737 39.7917V24.5C41.4737 23.8681 41.0774 23.0208 40.3684 22.6667Z" stroke="currentColor" stroke-width="3"></path><path d="M33.3421 3.75L20.2368 11.25C19.1842 11.875 19.1842 13.375 20.2368 14L33.3421 21.5C34.3947 22.125 35.8158 21.2778 35.8158 20.0417V5.16667C35.8158 3.93056 34.3947 3.125 33.3421 3.75Z" stroke="currentColor" stroke-width="3"></path></svg>
                             <h3 class="text-xl font-bold mb-2">Trust Ecosystem</h3>
-                            <p class="text-slate-300">A secure environment where projects, agencies, and KOLs collaborate confidently.</p>
+                            <p class="text-slate-400">A secure environment where projects, agencies, and KOLs collaborate confidently.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 5: Dashboard -->
+                <!-- Slide 5: Qualitative Analysis -->
                 <div id="slide-5" class="slide">
+                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">Qualitative Analysis On Any KOL</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl">
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Performance Tracking</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Audience Analysis</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Content Analysis</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Bot Detection</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Sentiment Analysis</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">ROI Calculation</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Deleted Tweet Tracking</h3></div>
+                        <div class="card text-center items-center justify-center flex"><h3 class="font-semibold text-lg">Competitor Comparison</h3></div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Dashboard -->
+                <div id="slide-6" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Data & Insights You Can <span class="gradient-text">Trust</span></h2>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-6xl">
                         <div class="card">
                             <h3 class="font-bold text-xl mb-4 text-center">Top 10 Authors by Impact</h3>
                             <div class="overflow-x-auto">
@@ -155,7 +171,6 @@
                                         <tr class="border-b border-[#2A2835]"><td class="p-3 font-medium">rukizcukiz</td><td class="p-3 text-right">4,564</td></tr>
                                         <tr class="border-b border-[#2A2835]"><td class="p-3 font-medium">GraceBe69120698</td><td class="p-3 text-right">3,918</td></tr>
                                         <tr class="border-b border-[#2A2835]"><td class="p-3 font-medium">Only1BossJay</td><td class="p-3 text-right">1,280</td></tr>
-                                        <tr class="border-b border-[#2A2835]"><td class="p-3 font-medium">DQgabela</td><td class="p-3 text-right">1,064</td></tr>
                                         <tr><td class="p-3 font-medium">_Alhajimusa</td><td class="p-3 text-right">306</td></tr>
                                     </tbody>
                                 </table>
@@ -173,41 +188,38 @@
                                 <div id="mentionsLegend" class="flex flex-col space-y-2 w-full px-4"></div>
                             </div>
                         </div>
-                        <div class="card lg:col-span-2">
-                             <h3 class="font-bold text-xl mb-4 text-center">Sentiment Trend</h3>
-                             <div class="chart-container"><canvas id="sentimentChart"></canvas></div>
+                        <div class="lg:col-span-2 mt-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-4xl mx-auto">
+                            <div><p class="text-4xl font-bold gradient-text">12,483</p><p class="text-slate-400 mt-1">KOLs Indexed</p></div>
+                            <div><p class="text-4xl font-bold gradient-text">2,891</p><p class="text-slate-400 mt-1">Agents Using WiseOne</p></div>
+                            <div><p class="text-4xl font-bold gradient-text">45,872</p><p class="text-slate-400 mt-1">Reports Generated</p></div>
+                            <div><p class="text-4xl font-bold gradient-text">158</p><p class="text-slate-400 mt-1">Active Campaigns</p></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 6: Competitive Edge -->
-                <div id="slide-6" class="slide">
+                <!-- Slide 7: Competitive Edge -->
+                <div id="slide-7" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Unmatched Competitive Edge</h2>
                     <div class="w-full max-w-4xl overflow-x-auto card">
                         <table class="w-full min-w-max text-center">
                             <thead class="text-lg">
-                                <tr class="border-b border-[#2A2835]">
-                                    <th class="p-4 text-left">Feature</th>
-                                    <th class="p-4 gradient-text">WiseOne</th>
-                                    <th class="p-4 text-slate-400">Kaito</th>
-                                    <th class="p-4 text-slate-400">Cookie3</th>
-                                </tr>
+                                <tr class="border-b border-[#2C2A37]"><th class="p-4 text-left">Feature</th><th class="p-4 gradient-text">WiseOne</th><th class="p-4 text-slate-400">Kaito</th><th class="p-4 text-slate-400">Cookie3</th></tr>
                             </thead>
                             <tbody class="text-slate-200">
-                                <tr class="border-b border-[#2A2835]"><td class="p-4 text-left font-semibold">Real-time KOL audits</td><td class="p-4 text-[#A455FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
-                                <tr class="border-b border-[#2A2835]"><td class="p-4 text-left font-semibold">Fake follower & bot detection</td><td class="p-4 text-[#A455FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-[#A455FF] font-bold text-2xl">✔</td></tr>
-                                <tr class="border-b border-[#2A2835]"><td class="p-4 text-left font-semibold">Deleted tweet tracking</td><td class="p-4 text-[#A455FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
-                                <tr><td class="p-4 text-left font-semibold">Verifiable pre/post campaign ROI</td><td class="p-4 text-[#A455FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
+                                <tr class="border-b border-[#2C2A37]"><td class="p-4 text-left font-semibold">Real-time KOL audits</td><td class="p-4 text-[#C879FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
+                                <tr class="border-b border-[#2C2A37]"><td class="p-4 text-left font-semibold">Fake follower & bot detection</td><td class="p-4 text-[#C879FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-[#C879FF] font-bold text-2xl">✔</td></tr>
+                                <tr class="border-b border-[#2C2A37]"><td class="p-4 text-left font-semibold">Deleted tweet tracking</td><td class="p-4 text-[#C879FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
+                                <tr><td class="p-4 text-left font-semibold">Verifiable pre/post campaign ROI</td><td class="p-4 text-[#C879FF] font-bold text-2xl">✔</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td><td class="p-4 text-red-400 font-bold text-2xl">✖</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Slide 7: Tokenomics -->
-                <div id="slide-7" class="slide">
+                <!-- Slide 8: Tokenomics -->
+                <div id="slide-8" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">DAPS vs. YAPS — The Tokenomics of Trust</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
-                        <div class="card border-2 border-[#7B42F6] bg-[#7b42f6]/10">
+                        <div class="card border-2 border-[#9B51E0] bg-[#9B51E0]/10">
                             <h3 class="text-3xl font-bold gradient-text mb-4">DAPS (WiseOne)</h3>
                             <ul class="space-y-3 list-disc list-inside text-slate-200 text-lg">
                                 <li>Utility token for reports, governance.</li>
@@ -225,8 +237,8 @@
                     </div>
                 </div>
 
-                <!-- Slide 8: Roadmap -->
-                <div id="slide-8" class="slide">
+                <!-- Slide 9: Roadmap -->
+                <div id="slide-9" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Where We Are & Where We're Going</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
                         <div class="card">
@@ -237,7 +249,7 @@
                                 <li>Audited data, multi-sig wallet integration.</li>
                             </ul>
                         </div>
-                        <div class="card border-t-4 border-[#7B42F6]">
+                        <div class="card border-t-4 border-[#9B51E0]">
                             <h3 class="text-2xl font-bold text-slate-100 mb-4">Where We’re Going Next</h3>
                             <ul class="space-y-3 list-disc list-inside text-slate-300 text-lg">
                                 <li>Full product launch by end of July.</li>
@@ -248,8 +260,8 @@
                     </div>
                 </div>
                 
-                <!-- Slide 9: Join the Ecosystem -->
-                <div id="slide-9" class="slide">
+                <!-- Slide 10: Join the Ecosystem -->
+                <div id="slide-10" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Join the <span class="gradient-text">Trust Ecosystem</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
                         <div class="card">
@@ -271,67 +283,92 @@
                     </div>
                 </div>
 
-                <!-- Slide 10: Pricing -->
-                <div id="slide-10" class="slide">
+                <!-- Slide 11: Pricing -->
+                <div id="slide-11" class="slide">
                      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Pricing <span class="gradient-text">Designed For Scale</span></h2>
-                     
-                     <!-- Standard Tiers -->
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto">
-                        <!-- On-Demand KOL Audits -->
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
                         <div class="card flex flex-col">
                             <h3 class="text-2xl font-bold text-slate-100">On-Demand KOL Audits</h3>
-                            <p class="text-4xl font-bold my-4">$39.99<span class="text-lg font-medium text-slate-400">/report</span></p>
-                            <p class="text-slate-300 mb-6 flex-grow">
-                                Deep-dive, 30-day analyses of 500+ pre-vetted Tier 1 & 2 KOLs. Verify real influence before you spend a dime.
-                            </p>
-                            <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Report</button>
+                            <p class="text-4xl font-bold my-4">$39<span class="text-lg font-medium text-slate-400">/report</span></p>
+                            <p class="text-slate-400 mb-6 flex-grow">Deep-dive analyses of 500+ pre-vetted Tier 1 & 2 KOLs. Verify real influence before you spend a dime.</p>
+                            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Report</button>
                         </div>
-                        <!-- Project Indexing -->
-                        <div class="card flex flex-col border-2 border-[#7B42F6] relative">
-                             <div class="absolute top-0 right-6 -mt-4 bg-[#7B42F6] text-white text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
+                        <div class="card flex flex-col border-2 border-[#9B51E0] relative">
+                             <div class="absolute top-0 right-6 -mt-4 bg-[#9B51E0] text-white text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
                             <h3 class="text-2xl font-bold text-slate-100">Project Indexing</h3>
-                            <p class="text-4xl font-bold my-4">$299.99<span class="text-lg font-medium text-slate-400">/month</span></p>
-                            <p class="text-slate-300 mb-6 flex-grow">
-                                See everything. We monitor your project end-to-end: real-time KOL attribution, Reddit buzz, news sentiment, and market shifts.
-                            </p>
+                            <p class="text-4xl font-bold my-4">$299<span class="text-lg font-medium text-slate-400">/month</span></p>
+                            <p class="text-slate-400 mb-6 flex-grow">End-to-end project monitoring: real-time KOL attribution, market shifts, and sentiment analysis.</p>
                             <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Choose Plan</button>
                         </div>
-                     </div>
-
-                     <!-- White-Glove Service Section -->
-                     <div class="w-full max-w-5xl mx-auto mt-12">
-                        <div class="card !p-8 bg-[#1C1A27] border-t-4 border-[#7B42F6]">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                                <div class="flex-grow">
-                                    <h3 class="text-2xl font-bold text-slate-100">White-Glove Campaign Management</h3>
-                                    <p class="text-slate-300 mt-2">
-                                       Let our experts manage your entire campaign. We'll hand-pick verified KOLs, negotiate rates, and provide continuous performance monitoring. This full-service solution has no direct cost to you.
-                                    </p>
-                                </div>
-                                <div class="flex-shrink-0 text-center">
-                                     <p class="text-2xl font-bold">Agencies Pay Lead Fee</p>
-                                     <button class="primary-button font-bold py-3 px-8 rounded-lg transition-colors mt-4 w-full md:w-auto">Contact Us</button>
-                                </div>
-                            </div>
+                        <div class="card flex flex-col relative">
+                             <div class="absolute top-0 right-6 -mt-4 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Limited Time</div>
+                            <h3 class="text-2xl font-bold text-slate-100">KOL Indexing & Audit</h3>
+                            <p class="text-4xl font-bold my-4"><span class="text-2xl text-slate-500 line-through mr-2">$149</span>$99</p>
+                            <p class="text-slate-400 mb-6 flex-grow">Get your profile audited and indexed. Showcase your verified data to projects and agencies with this one-time introductory offer.</p>
+                            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Claim $99 Offer</button>
                         </div>
+                     </div>
+                </div>
+                
+                <!-- Slide 12: KOL Audit Application -->
+                <div id="slide-12" class="slide">
+                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-6">Become a <span class="gradient-text">Verified KOL</span></h2>
+                    <p class="text-center text-yellow-400 font-semibold mb-6">Limited Time Offer: Get your full audit and indexing for just $99 (usually $149)!</p>
+                    <div class="card w-full max-w-lg">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="kol-name" class="block text-sm font-medium text-slate-300">Name</label>
+                                <input type="text" id="kol-name" placeholder="Your Name" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                             <div>
+                                <label for="kol-email" class="block text-sm font-medium text-slate-300">Email</label>
+                                <input type="email" id="kol-email" placeholder="you@example.com" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                            <div>
+                                <label for="kol-handle" class="block text-sm font-medium text-slate-300">X (Twitter) Handle</label>
+                                <input type="text" id="kol-handle" placeholder="@yourhandle" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full primary-button font-bold py-3 px-6 rounded-lg transition-opacity">Apply for Audit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <!-- Slide 11: Call to Action -->
-                <div id="slide-11" class="slide text-center">
-                    <h2 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">Get In Touch With Our Team</h2>
-                    <p class="mt-4 text-xl md:text-2xl text-slate-300">Ready to uncover the truth behind your data?</p>
-                    <button class="primary-button mt-8 font-bold py-4 px-10 rounded-lg transition-all duration-300 text-lg transform hover:scale-105">
-                        Contact Us
-                    </button>
+                
+                <!-- Slide 13: White-Glove Service Inquiry -->
+                <div id="slide-13" class="slide">
+                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">White-Glove <span class="gradient-text">Service Inquiry</span></h2>
+                    <div class="card w-full max-w-lg">
+                        <form class="space-y-6">
+                             <div>
+                                <label for="wg-company" class="block text-sm font-medium text-slate-300">Company / Project Name</label>
+                                <input type="text" id="wg-company" placeholder="Your Company" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                            <div>
+                                <label for="wg-name" class="block text-sm font-medium text-slate-300">Contact Name</label>
+                                <input type="text" id="wg-name" placeholder="Your Name" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                            <div>
+                                <label for="wg-email" class="block text-sm font-medium text-slate-300">Contact Email</label>
+                                <input type="email" id="wg-email" placeholder="you@company.com" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]">
+                            </div>
+                             <div>
+                                <label for="wg-message" class="block text-sm font-medium text-slate-300">Briefly describe your needs</label>
+                                <textarea id="wg-message" rows="4" class="mt-1 block w-full bg-[#2C2A37] border border-slate-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-[#9B51E0] focus:border-[#9B51E0]"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full primary-button font-bold py-3 px-6 rounded-lg transition-opacity">Submit Inquiry</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>
         </main>
 
         <!-- Navigation -->
-        <footer class="flex justify-between items-center p-4 bg-[#110F1C] border-t border-[#2A2835]">
-            <button id="prevBtn" class="bg-[#2A2835] hover:bg-[#3c3a4b] text-white font-bold py-2 px-5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+        <footer class="flex justify-between items-center p-4 bg-[#13111B] border-t border-[#2C2A37]">
+            <button id="prevBtn" class="secondary-button font-bold py-2 px-5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                 Previous
             </button>
             <div id="slide-indicator" class="text-slate-400 text-sm font-medium"></div>
@@ -389,16 +426,9 @@
             showSlide(currentSlide);
 
             // --- CHART.JS IMPLEMENTATION ---
-            const chartJsTicks = {
-                color: '#94a3b8', // slate-400
-                font: { family: "'Inter', sans-serif" }
-            };
-
             function createChartsForSlide(slideId) {
-                if (slideId !== 'slide-5') return;
-                
                 const impactCanvas = document.getElementById('impactChart');
-                if (impactCanvas && !Chart.getChart(impactCanvas)) {
+                if (slideId === 'slide-6' && impactCanvas && !Chart.getChart(impactCanvas)) {
                     createDashboardCharts();
                 }
             }
@@ -409,9 +439,9 @@
                 const impactData = {
                     labels: ['Public', 'Manipulation'],
                     datasets: [{
-                        data: [98, 2], // Using 2% for better visibility of the small slice
-                        backgroundColor: ['#7B42F6', '#f98686'], // Purple, Salmon Red
-                        borderColor: '#1C1A27',
+                        data: [98, 2],
+                        backgroundColor: ['#9B51E0', '#f98686'],
+                        borderColor: '#1A1823',
                         borderWidth: 2,
                         hoverOffset: 4
                     }]
@@ -420,35 +450,18 @@
                     type: 'doughnut',
                     data: impactData,
                     options: {
-                        plugins: {
-                            legend: { display: false }, // Disable default legend
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return `${context.label}: ${context.raw}%`;
-                                    }
-                                }
-                            }
-                        },
+                        plugins: { legend: { display: false } },
                         maintainAspectRatio: false,
                         cutout: '70%'
                     }
                 });
 
-                // Generate Custom Legend for Impact Chart
                 const impactLegend = document.getElementById('impactLegend');
-                impactLegend.innerHTML = ''; // Clear existing legend
+                impactLegend.innerHTML = '';
                 impactData.labels.forEach((label, i) => {
                     const color = impactData.datasets[0].backgroundColor[i];
-                    const legendItem = `
-                        <div class="flex items-center space-x-3 text-slate-300 text-sm">
-                            <div class="w-4 h-4 rounded" style="background-color: ${color}"></div>
-                            <span>${label}</span>
-                        </div>
-                    `;
-                    impactLegend.innerHTML += legendItem;
+                    impactLegend.innerHTML += `<div class="flex items-center space-x-3 text-slate-300 text-sm"><div class="w-4 h-4 rounded" style="background-color: ${color}"></div><span>${label}</span></div>`;
                 });
-
 
                 // --- Mentions Chart (Doughnut with Custom Legend) ---
                 const mentionsCtx = document.getElementById('mentionsChart');
@@ -456,95 +469,30 @@
                     labels: ['Manipulation', 'Public', 'Media'],
                     datasets: [{
                         data: [45, 35, 20],
-                        backgroundColor: ['#f87171', '#7B42F6', '#0ea5e9'], // Red, Purple, Sky Blue
-                        borderColor: '#1C1A27',
+                        backgroundColor: ['#f87171', '#9B51E0', '#0ea5e9'],
+                        borderColor: '#1A1823',
                         borderWidth: 2,
                         hoverOffset: 4
                     }]
                 };
                  new Chart(mentionsCtx, {
-                    type: 'doughnut', // Changed from 'pie' to 'doughnut'
+                    type: 'doughnut',
                     data: mentionsData,
                     options: {
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return `${context.label}: ${context.raw}%`;
-                                    }
-                                }
-                            }
-                        },
+                        plugins: { legend: { display: false } },
                         maintainAspectRatio: false,
-                        cutout: '70%' // Added to match Impact chart
+                        cutout: '70%'
                     }
                 });
 
-                // Generate Custom Legend for Mentions Chart
                 const mentionsLegend = document.getElementById('mentionsLegend');
-                mentionsLegend.innerHTML = ''; // Clear existing legend
+                mentionsLegend.innerHTML = '';
                 mentionsData.labels.forEach((label, i) => {
                     const color = mentionsData.datasets[0].backgroundColor[i];
-                    const legendItem = `
-                        <div class="flex items-center space-x-3 text-slate-300 text-sm">
-                            <div class="w-4 h-4 rounded" style="background-color: ${color}"></div>
-                            <span>${label}</span>
-                        </div>
-                    `;
-                    mentionsLegend.innerHTML += legendItem;
-                });
-
-                // --- Sentiment Chart (Line) ---
-                const sentimentCtx = document.getElementById('sentimentChart');
-                new Chart(sentimentCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['15:51', '17:51', '19:51', '21:51', '23:51', '01:51', '03:51', '05:51', '07:51', '08:51'],
-                        datasets: [
-                            {
-                                label: 'Public',
-                                data: [20, 25, 80, 25, 30, 20, 40, 35, 50, 60],
-                                borderColor: '#7B42F6',
-                                backgroundColor: '#7B42F630',
-                                tension: 0.4,
-                                fill: true,
-                            },
-                            {
-                                label: 'Manipulation',
-                                data: [10, 60, 20, 40, -10, 15, 25, 10, 20, 15],
-                                borderColor: '#f87171',
-                                backgroundColor: '#f8717130',
-                                tension: 0.4,
-                                fill: true,
-                            },
-                            {
-                                label: 'Media',
-                                data: [30, 20, 40, 10, 25, 5, 10, 20, 30, 25],
-                                borderColor: '#0ea5e9',
-                                backgroundColor: '#0ea5e930',
-                                tension: 0.4,
-                                fill: true,
-                            }
-                        ]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: { color: '#cbd5e1', font: { family: "'Inter', sans-serif" }, padding: 20, }
-                            }
-                        },
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: { beginAtZero: false, ticks: chartJsTicks, grid: { color: '#2A2835' } },
-                            x: { ticks: chartJsTicks, grid: { color: '#2A2835' } }
-                        }
-                    }
+                    mentionsLegend.innerHTML += `<div class="flex items-center space-x-3 text-slate-300 text-sm"><div class="w-4 h-4 rounded" style="background-color: ${color}"></div><span>${label}</span></div>`;
                 });
             }
         });
     </script>
 </body>
 </html>
-
