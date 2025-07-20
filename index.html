@@ -280,56 +280,51 @@
                     </div>
                 </div>
 
-               <!-- Slide 10: Updated Pricing Table -->
+            <!-- Slide 10: Card-Based Pricing (Updated) -->
 <div id="slide-10" class="slide">
-    <h2 class="text-3xl md:text-5xl font-bold text-center mb-6">Simple, Transparent Pricing</h2>
-    <p class="text-lg text-text-secondary text-center mb-10 max-w-3xl mx-auto">Start small or scale up—every plan delivers real, verifiable KOL insights.</p>
-    <div class="overflow-x-auto w-full max-w-5xl mx-auto">
-        <table class="min-w-full text-left text-lg text-text-secondary border-separate border-spacing-y-2">
-            <thead>
-                <tr>
-                    <th class="font-bold text-text-primary p-3">Tier Name</th>
-                    <th class="font-bold text-text-primary p-3">What’s Included</th>
-                    <th class="font-bold text-text-primary p-3">Price</th>
-                    <th class="font-bold text-text-primary p-3">Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-surface rounded-xl">
-                    <td class="p-3 font-semibold text-text-primary">Starter Report</td>
-                    <td class="p-3">1 influencer, 30-day report</td>
-                    <td class="p-3">$49 (one-time)</td>
-                    <td class="p-3">Entry-level, for trial or small users</td>
-                </tr>
-                <tr class="bg-surface rounded-xl">
-                    <td class="p-3 font-semibold text-text-primary">Growth Bundle</td>
-                    <td class="p-3">5 influencer reports, 30 days each</td>
-                    <td class="p-3">$199 (one-time)</td>
-                    <td class="p-3">For small projects or agencies</td>
-                </tr>
-                <tr class="bg-surface rounded-xl">
-                    <td class="p-3 font-semibold text-text-primary">Pro Bundle</td>
-                    <td class="p-3">20 influencer reports, 30 days each</td>
-                    <td class="p-3">$699 (one-time)</td>
-                    <td class="p-3">For larger campaigns</td>
-                </tr>
-                <tr class="bg-surface rounded-xl">
-                    <td class="p-3 font-semibold text-text-primary">Ongoing Monitor</td>
-                    <td class="p-3">Project + 5 KOLs, continuous monitoring</td>
-                    <td class="p-3">$399/month</td>
-                    <td class="p-3">Subscription, includes weekly updates</td>
-                </tr>
-                <tr class="bg-surface rounded-xl">
-                    <td class="p-3 font-semibold text-text-primary">Enterprise / White Glove</td>
-                    <td class="p-3">Custom analytics, consultative support, API access</td>
-                    <td class="p-3">Custom/Retainer</td>
-                    <td class="p-3">Tailored for large clients</td>
-                </tr>
-            </tbody>
-        </table>
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-6">Pricing for <span class="gradient-text">Projects, Brands, & KOLs</span></h2>
+    <p class="text-lg text-text-secondary text-center mb-10 max-w-3xl mx-auto">Choose your plan—pay once or subscribe. Every tier gives you verified KOL insights and real data, not hype.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
+        <!-- Starter Report -->
+        <div class="card flex flex-col p-6 border-2 border-color-purple-light relative">
+            <div class="absolute top-0 right-6 -mt-4 bg-color-purple-light text-color-bg text-sm font-bold px-3 py-1 rounded-full">Entry Level</div>
+            <h3 class="text-2xl font-bold text-text-primary">Starter Report</h3>
+            <p class="text-4xl font-bold my-4">$49<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
+            <p class="text-text-secondary mb-6 flex-grow">1 influencer, 30-day report<br><span class="text-xs text-text-secondary">For trial or small users</span></p>
+            <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Order Now</button>
+        </div>
+        <!-- Growth Bundle -->
+        <div class="card flex flex-col p-6">
+            <h3 class="text-2xl font-bold text-text-primary">Growth Bundle</h3>
+            <p class="text-4xl font-bold my-4">$199<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
+            <p class="text-text-secondary mb-6 flex-grow">5 influencer reports, 30 days each<br><span class="text-xs text-text-secondary">For small projects or agencies</span></p>
+            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Bundle</button>
+        </div>
+        <!-- Pro Bundle -->
+        <div class="card flex flex-col p-6">
+            <h3 class="text-2xl font-bold text-text-primary">Pro Bundle</h3>
+            <p class="text-4xl font-bold my-4">$699<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
+            <p class="text-text-secondary mb-6 flex-grow">20 influencer reports, 30 days each<br><span class="text-xs text-text-secondary">For larger campaigns</span></p>
+            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Pro</button>
+        </div>
+        <!-- Ongoing Monitor -->
+        <div class="card flex flex-col p-6 border-2 border-color-purple-light relative">
+            <div class="absolute top-0 right-6 -mt-4 bg-color-purple-light text-color-bg text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
+            <h3 class="text-2xl font-bold text-text-primary">Ongoing Monitor</h3>
+            <p class="text-4xl font-bold my-4">$399<span class="text-lg font-medium text-text-secondary">/month</span></p>
+            <p class="text-text-secondary mb-6 flex-grow">Project + 5 KOLs, continuous monitoring<br><span class="text-xs text-text-secondary">Subscription, includes weekly updates</span></p>
+            <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Subscribe</button>
+        </div>
+        <!-- Enterprise / White Glove -->
+        <div class="card flex flex-col p-6 lg:col-span-4">
+            <h3 class="text-2xl font-bold text-text-primary">Enterprise / White Glove</h3>
+            <p class="text-4xl font-bold my-4">Custom/Retainer</p>
+            <p class="text-text-secondary mb-6 flex-grow">Custom analytics, consultative support, API access<br><span class="text-xs text-text-secondary">Tailored for large clients</span></p>
+            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Contact Sales</button>
+        </div>
     </div>
     <div class="mt-8 text-center">
-        <span class="text-sm text-text-secondary">*Competitor platforms start at $599–$1,000+/month. Wise One delivers deeper audits and custom insights for less.</span>
+        <span class="text-sm text-text-secondary">*Competitor platforms start at $599–$1,000+/month. Wise One gives you premium insights for less.</span>
     </div>
 </div>
 
