@@ -34,7 +34,7 @@
             width: 100%;
             left: 0;
             top: 0;
-            padding: 1rem;
+            padding: 2rem;
             align-items: center;
             justify-content: center;
             flex-direction: column;
@@ -48,10 +48,6 @@
             position: relative;
             width: 100%;
             min-height: 85vh;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
         }
         .gradient-text {
             background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
@@ -71,8 +67,8 @@
             height: 100%;
         }
         .primary-button {
-             background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
-             color: var(--color-text-primary);
+            background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
+            color: var(--color-text-primary);
         }
         .primary-button:hover {
             opacity: 0.9;
@@ -123,7 +119,7 @@
                             <p class="text-text-secondary">A partnership with the wrong influencer can destroy your brand's reputation overnight. Is that a risk you're willing to take?</p>
                         </div>
                         <div class="card text-center flex flex-col items-center">
-                             <svg class="w-16 h-16 mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-16 h-16 mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <h3 class="text-xl font-bold mb-2">The Danger of Deception</h3>
                             <p class="text-text-secondary">Without verifiable data, you can't prove your marketing works. How long until your stakeholders lose faith?</p>
                         </div>
@@ -134,7 +130,7 @@
                 <div id="slide-3" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">The Solution: <span class="gradient-text">Real Impact Verification</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
-                         <div class="card text-center flex flex-col items-center">
+                        <div class="card text-center flex flex-col items-center">
                             <svg class="w-16 h-16 mb-4 text-color-purple-light" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="16" cy="16" r="2.5"></circle><circle cx="16" cy="6" r="2"></circle><circle cx="16" cy="26" r="2"></circle><circle cx="6" cy="16" r="2"></circle><circle cx="26" cy="16" r="2"></circle><circle cx="9.9" cy="9.9" r="2"></circle><circle cx="22.1" cy="22.1" r="2"></circle><circle cx="9.9" cy="22.1" r="2"></circle><circle cx="22.1" cy="9.9" r="2"></circle>
                             </svg>
@@ -191,8 +187,20 @@
                     </div>
                 </div>
                 
-                <!-- Slide 5: Your Unfair Advantage -->
-                <div id="slide-5" class="slide">
+                <!-- Slide 5: Fake Influence -->
+                <div id="slide-5" class="slide text-center">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">This Is How Easy It Is to Fake Influence</h2>
+                    <p class="text-text-secondary mb-8 max-w-2xl mx-auto">The video below demonstrates how easily engagement metrics can be manipulated, creating a deceptive appearance of influence and reach.</p>
+                    <div class="w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-border">
+                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/0D0B14/C879FF?text=Click+to+Play+Video">
+                            <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20%281%29.mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                
+                <!-- Slide 6: Your Unfair Advantage -->
+                <div id="slide-6" class="slide">
                      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Your <span class="gradient-text">Competitive Advantage</span></h2>
                      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
                         <div class="card flex flex-col text-center">
@@ -219,38 +227,31 @@
                      </div>
                 </div>
 
-                <!-- Slide 7: Fake Influence -->
-                <div id="slide-7" class="slide text-center">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">This Is How Easy It Is to Fake Influence</h2>
-                    <p class="text-text-secondary mb-8 max-w-2xl mx-auto">The video below demonstrates how easily engagement metrics can be manipulated, creating a deceptive appearance of influence and reach.</p>
-                    <div class="w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-border">
-                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/0D0B14/C879FF?text=Click+to+Play+Video">
-                            <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20%281%29.mov" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                <!-- Slide 7: Why WiseOne? -->
+                <div id="slide-7" class="slide">
+                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Why <span class="gradient-text">WiseOne</span>?</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+                        <div class="card p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-4">1. Audited, Actionable Data</h3>
+                            <p class="text-text-secondary flex-grow">See beyond vanity metrics to the actual organic engagement and unique real people brought into conversations.</p>
+                        </div>
+                        <div class="card p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-4">2. Accountability & Cost Savings</h3>
+                            <p class="text-text-secondary flex-grow">Prevent wasted marketing spend and avoid the “black box” of traditional KOL marketing where ROI is unclear.</p>
+                        </div>
+                        <div class="card p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-4">3. Competitive & Accessible</h3>
+                            <p class="text-text-secondary flex-grow">Get advanced analytics at a fraction of the cost of legacy platforms, with both self-serve and white-glove options.</p>
+                        </div>
+                        <div class="card p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-4">4. Global Reach & Trust</h3>
+                            <p class="text-text-secondary flex-grow">Analyze campaigns across multiple platforms and 100+ languages, with data pipelines audited by third parties.</p>
+                        </div>
+                     </div>
                 </div>
-                
-                
-                <!-- Slide 8: Get Started Today -->
+
+                <!-- Slide 8: Join the Ecosystem -->
                 <div id="slide-8" class="slide">
-                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">Index Today & <span class="gradient-text">Get Started</span></h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                        <div class="card text-center flex flex-col items-center">
-                             <svg class="w-16 h-16 mb-4 text-color-purple-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            <h3 class="text-xl font-bold mb-2">First Report in 24 Hours</h3>
-                            <p class="text-text-secondary">Index today to get started and receive your first comprehensive report within 24 hours.</p>
-                        </div>
-                        <div class="card text-center flex flex-col items-center">
-                           <svg class="w-16 h-16 mb-4 text-color-purple-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M4 4l5 5M20 20l-5-5"></path></svg>
-                            <h3 class="text-xl font-bold mb-2">Daily Campaign Updates</h3>
-                            <p class="text-text-secondary">Receive daily updates on your project at 8am EST, keeping track of all changes during your campaign.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Slide 9: Join the Ecosystem -->
-                <div id="slide-9" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Join the <span class="gradient-text">Trust Ecosystem</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl">
                         <div class="card p-6" style="background-image: radial-gradient(circle at top left, rgba(200, 121, 255, 0.1), transparent 40%)">
@@ -280,78 +281,8 @@
                     </div>
                 </div>
 
-         <!-- Slide 10: Card-Based Pricing (Least to Greatest) -->
-<div id="slide-10" class="slide">
-    <h2 class="text-3xl md:text-5xl font-bold text-center mb-6">Pricing for <span class="gradient-text">Projects, Brands, & KOLs</span></h2>
-    <p class="text-lg text-text-secondary text-center mb-10 max-w-3xl mx-auto">Choose your plan—pay once or subscribe. Every tier gives you verified KOL insights and real data, not hype.</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
-        <!-- Starter Report -->
-        <div class="card flex flex-col p-6 border-2 border-color-purple-light relative">
-            <div class="absolute top-0 right-6 -mt-4 bg-color-purple-light text-color-bg text-sm font-bold px-3 py-1 rounded-full">Entry Level</div>
-            <h3 class="text-2xl font-bold text-text-primary">Starter Report</h3>
-            <p class="text-4xl font-bold my-4">$49<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
-            <p class="text-text-secondary mb-6 flex-grow">1 influencer, 30-day report<br><span class="text-xs text-text-secondary">For trial or small users</span></p>
-            <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Order Now</button>
-        </div>
-        <!-- Growth Bundle -->
-        <div class="card flex flex-col p-6">
-            <h3 class="text-2xl font-bold text-text-primary">Growth Bundle</h3>
-            <p class="text-4xl font-bold my-4">$199<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
-            <p class="text-text-secondary mb-6 flex-grow">5 influencer reports, 30 days each<br><span class="text-xs text-text-secondary">For small projects or agencies</span></p>
-            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Bundle</button>
-        </div>
-          <!-- Ongoing Monitor -->
-        <div class="card flex flex-col p-6 border-2 border-color-purple-light relative">
-            <div class="absolute top-0 right-6 -mt-4 bg-color-purple-light text-color-bg text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
-            <h3 class="text-2xl font-bold text-text-primary">Ongoing Monitor</h3>
-            <p class="text-4xl font-bold my-4">$399<span class="text-lg font-medium text-text-secondary">/month</span></p>
-            <p class="text-text-secondary mb-6 flex-grow">Project + 5 KOLs, continuous monitoring<br><span class="text-xs text-text-secondary">Subscription, includes weekly updates</span></p>
-            <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Subscribe</button>
-        </div>
-        <!-- Pro Bundle -->
-        <div class="card flex flex-col p-6">
-            <h3 class="text-2xl font-bold text-text-primary">Pro Bundle</h3>
-            <p class="text-4xl font-bold my-4">$699<span class="text-lg font-medium text-text-secondary"> (one-time)</span></p>
-            <p class="text-text-secondary mb-6 flex-grow">20 influencer reports, 30 days each<br><span class="text-xs text-text-secondary">For larger campaigns</span></p>
-            <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Pro</button>
-        </div>
-    </div>
-    <!-- Enterprise / White Glove (Full width below cards) -->
-    <div class="card flex flex-col p-6 mt-8 lg:col-span-4">
-        <h3 class="text-2xl font-bold text-text-primary">Enterprise / White Glove</h3>
-        <p class="text-4xl font-bold my-4">Custom/Retainer</p>
-        <p class="text-text-secondary mb-6 flex-grow">Custom analytics, consultative support, API access<br><span class="text-xs text-text-secondary">Tailored for large clients</span></p>
-        <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Contact Sales</button>
-    </div>
-    <div class="mt-8 text-center">
-        <span class="text-sm text-text-secondary">*Competitor platforms start at $599–$1,000+/month. Wise One gives you premium insights for less.</span>
-    </div>
-</div>
-                  <!-- Slide 5: Why WiseOne? -->
-                <div id="slide-5" class="slide">
-                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Why <span class="gradient-text">WiseOne</span>?</h2>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-                        <div class="card p-6 flex flex-col">
-                            <h3 class="text-2xl font-bold gradient-text mb-4">1. Audited, Actionable Data</h3>
-                            <p class="text-text-secondary flex-grow">See beyond vanity metrics to the actual organic engagement and unique real people brought into conversations.</p>
-                        </div>
-                        <div class="card p-6 flex flex-col">
-                            <h3 class="text-2xl font-bold gradient-text mb-4">2. Accountability & Cost Savings</h3>
-                            <p class="text-text-secondary flex-grow">Prevent wasted marketing spend and avoid the “black box” of traditional KOL marketing where ROI is unclear.</p>
-                        </div>
-                        <div class="card p-6 flex flex-col">
-                            <h3 class="text-2xl font-bold gradient-text mb-4">3. Competitive & Accessible</h3>
-                            <p class="text-text-secondary flex-grow">Get advanced analytics at a fraction of the cost of legacy platforms, with both self-serve and white-glove options.</p>
-                        </div>
-                        <div class="card p-6 flex flex-col">
-                            <h3 class="text-2xl font-bold gradient-text mb-4">4. Global Reach & Trust</h3>
-                            <p class="text-text-secondary flex-grow">Analyze campaigns across multiple platforms and 100+ languages, with data pipelines audited by third parties.</p>
-                        </div>
-                     </div>
-                </div>
-   
-             <!-- Slide 6: Results & Testimonials (NEW) -->
-                <div id="slide-6" class="slide">
+                <!-- Slide 9: Results & Testimonials -->
+                <div id="slide-9" class="slide">
                     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Results & <span class="gradient-text">Testimonials</span></h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
                         <div class="card flex flex-col justify-center p-8 bg-surface">
@@ -368,8 +299,123 @@
                         </div>
                     </div>
                 </div>
-                <!-- Slide 11: Call to Action -->
-                <div id="slide-11" class="slide text-center">
+
+                <!-- Slide 10: New Pricing Tiers -->
+                <div id="slide-10" class="slide">
+                    <div class="w-full text-center">
+                        <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">Flexible Pricing for <span class="gradient-text">Every Stage</span></h2>
+                        <p class="text-lg text-text-secondary text-center mb-10 max-w-3xl mx-auto">Pay for the certainty you need: from 500K to 5M+ verified data points a month, WiseOne replaces guesswork with forensic market intelligence.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto">
+                            <!-- Tier 1 -->
+                            <div class="card flex flex-col p-6 text-left">
+                                <h3 class="text-2xl font-bold text-text-primary">Tier 1 – Alpha/Seed</h3>
+                                <p class="text-color-purple-light font-semibold mb-4 text-lg">Gateway</p>
+                                <p class="text-4xl font-bold my-4">$2,000 <span class="text-xl font-medium text-text-secondary">/ month</span></p>
+                                <ul class="space-y-2 mb-6 text-text-secondary flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Up to 500K data points/month</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic Organic Detection</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic Sentiment & Manipulation</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-red-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>No project indexing</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-red-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>No competitive analysis</li>
+                                </ul>
+                                <p class="text-sm text-text-secondary mb-2"><strong>Commitment:</strong> 1-month term</p>
+                                <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Started</button>
+                            </div>
+                            <!-- Tier 2 -->
+                            <div class="card flex flex-col p-6 text-left">
+                                <h3 class="text-2xl font-bold text-text-primary">Tier 2 – Entry Level</h3>
+                                <p class="text-color-purple-light font-semibold mb-4 text-lg">Foundation</p>
+                                <p class="text-4xl font-bold my-4">$4,000 <span class="text-xl font-medium text-text-secondary">/ month</span></p>
+                                <ul class="space-y-2 mb-6 text-text-secondary flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Up to 1M data points/month</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Includes all Tier 1 features</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>20+ enriched data points</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-red-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>No project indexing</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-red-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>No competitive analysis</li>
+                                </ul>
+                                <p class="text-sm text-text-secondary mb-2"><strong>Commitment:</strong> 3-month minimum</p>
+                                <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Get Started</button>
+                            </div>
+                             <!-- Tier 3 -->
+                            <div class="card flex flex-col p-6 text-left border-2 border-color-purple-light relative">
+                                <div class="absolute top-0 right-6 -mt-4 bg-color-purple-light text-color-bg text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
+                                <h3 class="text-2xl font-bold text-text-primary">Tier 3 – Mid Tier</h3>
+                                <p class="text-color-purple-light font-semibold mb-4 text-lg">Expanded Oversight</p>
+                                <p class="text-4xl font-bold my-4">$7,500 <span class="text-xl font-medium text-text-secondary">/ month</span></p>
+                                <ul class="space-y-2 mb-6 text-text-secondary flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Up to 2.5M data points/month</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Includes all Tier 2 features</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to project indexing</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Competitive analysis</li>
+                                </ul>
+                                <p class="text-sm text-text-secondary mb-2"><strong>Commitment:</strong> 3-month minimum</p>
+                                <button class="primary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Choose Plan</button>
+                            </div>
+                             <!-- Tier 4 -->
+                            <div class="card flex flex-col p-6 text-left">
+                                <h3 class="text-2xl font-bold text-text-primary">Tier 4 – Top Tier</h3>
+                                <p class="text-color-purple-light font-semibold mb-4 text-lg">Deep Dive & Partnership</p>
+                                <p class="text-4xl font-bold my-4">$15,000+ <span class="text-xl font-medium text-text-secondary">/ month</span></p>
+                                <ul class="space-y-2 mb-6 text-text-secondary flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Up to 5M+ data points/month</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Includes all lower tier features</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Bespoke datasets</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Custom analytics & support</li>
+                                </ul>
+                                <p class="text-sm text-text-secondary mb-2"><strong>Commitment:</strong> 6-month minimum</p>
+                                <button class="secondary-button w-full font-bold py-3 px-6 rounded-lg transition-colors mt-auto">Contact Us</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 11: Pricing Details -->
+                <div id="slide-11" class="slide">
+                    <div class="w-full text-center">
+                        <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">Understanding Our <span class="gradient-text">Value</span></h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mx-auto">
+                            <div class="card flex flex-col p-6 text-left">
+                                <h3 class="text-2xl font-bold text-text-primary mb-4">What is a Data Point?</h3>
+                                <p class="text-text-secondary mb-4">A single, unique piece of content (tweet, post, article) fully enriched with over 20 attributes, including:</p>
+                                <ul class="space-y-2 text-text-secondary flex-grow">
+                                    <li><strong class="text-color-purple-light">Quality Signals:</strong> Advanced detection for bots and manipulation.</li>
+                                    <li><strong class="text-color-purple-light">Sentiment & Emotions:</strong> Analysis of tone and emotional undertones.</li>
+                                    <li><strong class="text-color-purple-light">Keyword & Topic Extraction:</strong> Identification of key entities and themes.</li>
+                                    <li><strong class="text-color-purple-light">Network Mapping:</strong> Metadata about the author and their influence.</li>
+                                </ul>
+                                <p class="mt-4 text-text-primary font-semibold text-lg"><span class="gradient-text">1M data points = 1M verified and analyzed pieces of content.</span></p>
+                            </div>
+                             <div class="card flex flex-col p-6 text-left justify-center">
+                                <h3 class="text-2xl font-bold text-text-primary mb-4">Payment & Discounts</h3>
+                                <p class="text-text-secondary mb-4 text-lg">We require a 50% upfront payment for all commitments to begin service.</p>
+                                <p class="text-text-primary text-xl font-bold gradient-text">Optional Annual Discount</p>
+                                <p class="text-text-secondary mt-2">We offer a <strong class="text-text-primary">10-15% discount</strong> for full upfront annual payments.</p>
+                                <p class="text-text-secondary text-sm mt-2">Example: Tier 3 at $7.5K/month ($90,000 annually) becomes $81,000 with a 10% discount.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 12: Get Started Today -->
+                <div id="slide-12" class="slide">
+                    <h2 class="text-3xl md:text-5xl font-bold text-center mb-10">Index Today & <span class="gradient-text">Get Started</span></h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                        <div class="card text-center flex flex-col items-center">
+                            <svg class="w-16 h-16 mb-4 text-color-purple-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">First Report in 24 Hours</h3>
+                            <p class="text-text-secondary">Index today to get started and receive your first comprehensive report within 24 hours.</p>
+                        </div>
+                        <div class="card text-center flex flex-col items-center">
+                           <svg class="w-16 h-16 mb-4 text-color-purple-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M4 4l5 5M20 20l-5-5"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">Daily Campaign Updates</h3>
+                            <p class="text-text-secondary">Receive daily updates on your project at 8am EST, keeping track of all changes during your campaign.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 13: Call to Action -->
+                <div id="slide-13" class="slide text-center">
                     <h2 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">Get In Touch With Our Team</h2>
                     <p class="mt-4 text-xl md:text-2xl text-text-secondary">Ready to uncover the truth behind your data?</p>
                     <button class="primary-button mt-8 font-bold py-4 px-10 rounded-lg transition-all duration-300 text-lg transform hover:scale-105">
