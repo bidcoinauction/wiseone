@@ -53,10 +53,13 @@
     .maxw-5xl { max-width: 64rem; }
     .maxw-4xl { max-width: 56rem; }
     .maxw-3xl { max-width: 48rem; }
+
+    /* Utility */
+    .no-select { user-select: none; }
   </style>
 </head>
 <body>
-  <div id="deck">
+  <div id="deck" class="no-select" aria-live="polite">
     <main id="slides" class="w-full h-full relative">
       <!-- Slide 1 -->
       <section id="s1" class="slide active">
@@ -99,7 +102,7 @@
       <section id="s4" class="slide">
         <h2 class="text-3xl md:text-4xl font-bold mb-2">Our Exclusive Pipeline, Powered by <span class="gradient-text">koat.ai</span></h2>
         <p class="text-center text-md text-secondary mb-6 maxw-4xl mx-auto">An inside look at the powerful engine that drives our insights.</p>
-        <div class="grid-3 maxw-7xl mx-auto" style="grid-template-columns: repeat(5, minmax(0,1fr));">
+        <div class="grid-3 maxw-6xl mx-auto" style="grid-template-columns: repeat(5, minmax(0,1fr)); gap: 1rem;">
           <div class="card text-left"><h3 class="text-lg font-bold gradient-text mb-1">1. Partnership</h3><p class="text-sm text-secondary">Exclusive access to real‑time crypto data, pricing, and 1B+ enriched history.</p></div>
           <div class="card text-left"><h3 class="text-lg font-bold gradient-text mb-1">2. Ingestion</h3><p class="text-sm text-secondary">koat.ai ingests millions of data points from social and 20k+ outlets.</p></div>
           <div class="card text-left"><h3 class="text-lg font-bold gradient-text mb-1">3. Filtering</h3><p class="text-sm text-secondary">Advanced bot‑detection removes automated activity for authentic signals.</p></div>
@@ -112,7 +115,7 @@
       <section id="s5" class="slide">
         <h2 class="text-3xl md:text-5xl font-bold mb-6">This Is How Easy It Is to <span class="gradient-text">Fake Influence</span></h2>
         <p class="text-secondary mb-8 max-w-3xl mx-auto">The video demo shows how engagement can be manipulated, creating a deceptive appearance of reach.</p>
-        <div class="w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden border" style="border-color: var(--border);">
+        <div class="w-full max-w-3xl rounded-lg overflow-hidden border" style="border-color: var(--border); aspect-ratio: 16/9; background:black;">
           <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/0D0B14/C879FF?text=Click+to+Play+Video">
             <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20(1).mov" type="video/mp4" />
             Your browser does not support the video tag.
@@ -144,7 +147,7 @@
       <!-- Slide 8 -->
       <section id="s8" class="slide">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Join the <span class="gradient-text">Trust Ecosystem</span></h2>
-        <div class="grid-3 maxw-7xl mx-auto">
+        <div class="grid-3 maxw-6xl mx-auto">
           <div class="card p-4 text-left" style="background-image: radial-gradient(circle at top left, rgba(200, 121, 255, .08), transparent 40%)">
             <h3 class="text-xl font-bold gradient-text mb-3">For Influencers & KOLs</h3>
             <ul class="space-y-2 text-secondary text-sm">
@@ -182,7 +185,7 @@
       </section>
 
       <!-- Slide 10 (Pricing) -->
-      < <section id="s10" class="slide active">
+      <section id="s10" class="slide">
         <h2 class="text-3xl md:text-5xl font-bold mb-6">Launch Promo <span class="gradient-text">Pricing</span></h2>
         <p class="text-md text-secondary mb-8 max-w-2xl mx-auto">Limited‑time discounts to kickstart your next KOL campaign.</p>
         <div class="grid-3 maxw-6xl mx-auto">
@@ -212,45 +215,59 @@
   </div>
 
   <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    let i = 0;
+    (function() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const deck = document.getElementById('deck');
+      let i = 0;
 
-    function go(n) {
-      if (n === i || n < 0 || n >= slides.length) return;
-      const cur = slides[i];
-      const next = slides[n];
-      cur.classList.remove('active');
-      cur.classList.add('fadeOut');
-      setTimeout(() => { cur.classList.remove('fadeOut'); cur.style.display = 'none'; }, 200);
-      next.style.display = 'flex';
-      next.classList.add('active', 'fadeIn');
-      setTimeout(() => next.classList.remove('fadeIn'), 300);
-      i = n;
-      history.replaceState(null, '', `#${i+1}`);
-    }
+      function setActive(n) {
+        slides.forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
+        const target = slides[n];
+        if (!target) return;
+        target.style.display = 'flex';
+        target.classList.add('active');
+        i = n;
+        // Update hash safely
+        try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+      }
 
-    function next() { if (i < slides.length - 1) go(i + 1); }
-    function prev() { if (i > 0) go(i - 1); }
+      function go(n) {
+        if (n === i || n < 0 || n >= slides.length) return;
+        const cur = slides[i];
+        const next = slides[n];
+        cur.classList.remove('active');
+        cur.classList.add('fadeOut');
+        setTimeout(() => { cur.classList.remove('fadeOut'); cur.style.display = 'none'; }, 200);
+        next.style.display = 'flex';
+        next.classList.add('active', 'fadeIn');
+        setTimeout(() => next.classList.remove('fadeIn'), 300);
+        i = n;
+        try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+      }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
-      if (e.key === 'ArrowLeft') { prev(); }
-    });
-    document.getElementById('deck').addEventListener('click', (e) => {
-      // Avoid advancing when clicking links/buttons inside slides
-      const tag = (e.target.tagName || '').toLowerCase();
-      if (['a','button','video'].includes(tag)) return;
-      next();
-    });
+      function next() { if (i < slides.length - 1) go(i + 1); }
+      function prev() { if (i > 0) go(i - 1); }
 
-    // Hash deep link support
-    const hash = parseInt(location.hash.replace('#',''), 10);
-    if (!isNaN(hash) && hash >= 1 && hash <= slides.length) {
-      slides.forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
-      slides[hash-1].style.display = 'flex';
-      slides[hash-1].classList.add('active');
-      i = hash - 1;
-    }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+      });
+
+      deck.addEventListener('click', (e) => {
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (['a','button','video','input','textarea','select','label'].includes(tag)) return;
+        next();
+      });
+
+      // Hash deep link support
+      const hashIndex = parseInt(location.hash.replace('#',''), 10);
+      if (!isNaN(hashIndex) && hashIndex >= 1 && hashIndex <= slides.length) {
+        setActive(hashIndex - 1);
+      } else {
+        setActive(0);
+      }
+    })();
   </script>
 </body>
 </html>
+
