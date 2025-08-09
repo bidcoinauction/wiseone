@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseOne Presentation – Minimal, Fullscreen</title>
+  <title>WiseOne Presentation – Instant Click</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -14,48 +12,33 @@
       --surface: #13111B;
       --card: #1A1823;
       --border: #2C2A37;
-      --text-primary: #F0F0F0; /* soft white */
-      --text-secondary: #A0A0B0; /* cool gray */
+      --text-primary: #F0F0F0;
+      --text-secondary: #A0A0B0;
       --purple-light: #C879FF;
       --purple-dark: #9B51E0;
     }
-    html, body { height: 100%; }
+    html, body { height: 100%; margin:0; padding:0; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text-primary);
-      margin: 0;
       overflow: hidden;
     }
-    /* Fullscreen deck */
     #deck { width: 100vw; height: 100vh; position: relative; }
-    .slide { position: absolute; inset: 0; display: none; padding: 2.5rem; }
+    .slide {
+      position: absolute; inset: 0;
+      display: none;
+      padding: 2.5rem;
+    }
     .slide.active { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-    .gradient-text { background: linear-gradient(90deg, var(--purple-light), var(--purple-dark)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-fill-color: transparent; }
-
+    .gradient-text { background: linear-gradient(90deg, var(--purple-light), var(--purple-dark)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .text-secondary { color: var(--text-secondary); }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: .75rem; padding: 1.5rem; }
-
-    /* Simple in/out animation */
-    .fadeIn { animation: fadeIn .3s ease both; }
-    .fadeOut { animation: fadeOut .22s ease both; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes fadeOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-12px); } }
-
-    /* Responsive grids */
     .grid-3 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
     @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
     .grid-2 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
     @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
-
     .maxw-6xl { max-width: 72rem; }
-    .maxw-5xl { max-width: 64rem; }
-    .maxw-4xl { max-width: 56rem; }
-    .maxw-3xl { max-width: 48rem; }
-
-    /* Utility */
-    .no-select { user-select: none; }
   </style>
 </head>
 <body>
@@ -214,59 +197,28 @@
     </main>
   </div>
 
-  <script>
-    (function() {
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const deck = document.getElementById('deck');
-      let i = 0;
-
-      function setActive(n) {
-        slides.forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
-        const target = slides[n];
-        if (!target) return;
-        target.style.display = 'flex';
-        target.classList.add('active');
-        i = n;
-        // Update hash safely
-        try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
-      }
-
-      function go(n) {
-        if (n === i || n < 0 || n >= slides.length) return;
-        const cur = slides[i];
-        const next = slides[n];
-        cur.classList.remove('active');
-        cur.classList.add('fadeOut');
-        setTimeout(() => { cur.classList.remove('fadeOut'); cur.style.display = 'none'; }, 200);
-        next.style.display = 'flex';
-        next.classList.add('active', 'fadeIn');
-        setTimeout(() => next.classList.remove('fadeIn'), 300);
-        i = n;
-        try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
-      }
-
-      function next() { if (i < slides.length - 1) go(i + 1); }
-      function prev() { if (i > 0) go(i - 1); }
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-      });
-
-      deck.addEventListener('click', (e) => {
-        const tag = (e.target.tagName || '').toLowerCase();
-        if (['a','button','video','input','textarea','select','label'].includes(tag)) return;
-        next();
-      });
-
-      // Hash deep link support
-      const hashIndex = parseInt(location.hash.replace('#',''), 10);
-      if (!isNaN(hashIndex) && hashIndex >= 1 && hashIndex <= slides.length) {
-        setActive(hashIndex - 1);
-      } else {
-        setActive(0);
-      }
-    })();
+<script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let i = 0;
+    function go(n) {
+      if (n === i || n < 0 || n >= slides.length) return;
+      slides[i].classList.remove('active');
+      slides[i].style.display = 'none';
+      slides[n].style.display = 'flex';
+      slides[n].classList.add('active');
+      i = n;
+    }
+    function next() { if (i < slides.length - 1) go(i + 1); }
+    function prev() { if (i > 0) go(i - 1); }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft') { prev(); }
+    });
+    document.getElementById('deck').addEventListener('click', (e) => {
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (['a','button','video'].includes(tag)) return;
+      next();
+    });
   </script>
 </body>
 </html>
