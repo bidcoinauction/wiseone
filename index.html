@@ -19,10 +19,10 @@
             --color-purple-light: #C879FF;
             --color-purple-dark: #9B51E0;
         }
-        html, body { 
-            height: 100%; 
-            margin: 0; 
-            padding: 0; 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
         }
         body {
@@ -30,10 +30,10 @@
             background-color: var(--color-bg);
             color: var(--color-text-primary);
         }
-        #deck { 
-            width: 100vw; 
-            height: 100vh; 
-            position: relative; 
+        #deck {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -75,11 +75,12 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            /* Changed to flex-start for consistent top alignment */
+            justify-content: flex-start;
         }
         .primary-button {
-             background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
-             color: var(--color-text-primary);
+            background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
+            color: var(--color-text-primary);
         }
         .primary-button:hover {
             opacity: 0.9;
@@ -111,29 +112,29 @@
             <!-- Slide 1 -->
             <section id="s1" class="slide active">
                 <h1 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">WiseOne</h1>
-                <h2 class="mt-4 text-2xl md:text-3xl font-bold">The Premier Influencer Audit & Performance Platform</h2>
+                <h2 class="mt-4 text-2xl md:text-3xl font-bold gradient-text">The Premier Influencer Audit & Performance Platform</h2>
                 <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl">Stop guessing. Start knowing. We replace vanity metrics with verifiable proof of impact.</p>
             </section>
 
             <!-- Slide 2 -->
             <section id="s2" class="slide">
-                <h2 class="text-3xl md:text-5xl font-bold mb-8">The Problem: <span class="gradient-text-red">Chaos</span> in KOL Marketing</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">The Problem: <span class="gradient-text">Chaos</span> in KOL Marketing</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="card text-left">
                         <div>
-                            <h3 class="text-xl font-bold gradient-text-red mb-2">The Fear of Fraud</h3>
+                            <h3 class="text-xl font-bold gradient-text mb-2">The Fear of Fraud</h3>
                             <p class="text-secondary">Your budget is bleeding out on ghost followers and botted engagement. Can you afford to keep guessing?</p>
                         </div>
                     </div>
                     <div class="card text-left">
                         <div>
-                            <h3 class="text-xl font-bold gradient-text-red mb-2">The Risk of Ruin</h3>
+                            <h3 class="text-xl font-bold gradient-text mb-2">The Risk of Ruin</h3>
                             <p class="text-secondary">A partnership with the wrong influencer can destroy your brand overnight. Why roll those dice?</p>
                         </div>
                     </div>
                     <div class="card text-left">
                         <div>
-                            <h3 class="text-xl font-bold gradient-text-red mb-2">The Danger of Deception</h3>
+                            <h3 class="text-xl font-bold gradient-text mb-2">The Danger of Deception</h3>
                             <p class="text-secondary">Without verifiable data, you can’t prove marketing works. Stakeholders won’t wait forever.</p>
                         </div>
                     </div>
@@ -168,7 +169,7 @@
 
             <!-- Slide 4 -->
             <section id="s4" class="slide">
-                <h2 class="text-3xl md:text-4xl font-bold mb-2">Our Exclusive Pipeline, Powered by <span class="gradient-text">koat.ai</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-2 gradient-text">Our Exclusive Pipeline, Powered by koat.ai</h2>
                 <p class="text-center text-md text-secondary mb-6 max-w-4xl mx-auto">An inside look at the powerful engine that drives our insights.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
                     <div class="card text-left p-4"><h3 class="text-lg font-bold gradient-text mb-1">1. Partnership</h3><p class="text-sm text-secondary">Exclusive access to real‑time crypto data, pricing, and 1B+ enriched history.</p></div>
@@ -193,7 +194,7 @@
 
             <!-- Slide 6 -->
             <section id="s6" class="slide">
-                <h2 class="text-3xl md:text-5xl font-bold mb-10">Your <span class="gradient-text">Competitive Advantage</span></h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-10 gradient-text">Your Competitive Advantage</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div class="card text-left">
                         <div>
@@ -227,7 +228,7 @@
 
             <!-- Slide 7 -->
             <section id="s7" class="slide">
-                <h2 class="text-3xl md:text-5xl font-bold mb-10">Why <span class="gradient-text">WiseOne</span>?</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-10 gradient-text">Why WiseOne?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                     <div class="card p-6 text-left">
                         <h3 class="text-2xl font-bold gradient-text mb-3">1. Unrivaled Data Integrity</h3>
@@ -250,26 +251,29 @@
 
             <!-- Slide 8 -->
             <section id="s8" class="slide">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Join the <span class="gradient-text">Trust Ecosystem</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Join the Trust Ecosystem</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- This card has its items top-aligned by default due to flex-col and flex-start -->
                     <div class="card p-6 text-left" style="background-image: radial-gradient(circle at top left, rgba(200, 121, 255, .08), transparent 40%)">
-                        <h3 class="text-xl font-bold text-text-primary mb-3">For Influencers & KOLs</h3>
+                        <h3 class="text-xl font-bold gradient-text mb-3">For Influencers & KOLs</h3>
                         <ul class="space-y-2 text-secondary text-lg">
                             <li><strong class="text-white">Prove True Influence:</strong> Showcase authentic engagement.</li>
                             <li><strong class="text-white">Unlock Opportunities:</strong> Access our curated brand marketplace.</li>
                             <li><strong class="text-white">Maximize Earnings:</strong> Use verifiable data to command higher rates.</li>
                         </ul>
                     </div>
+                    <!-- This card now aligns correctly with its siblings -->
                     <div class="card p-6 text-left">
-                        <h3 class="text-xl font-bold text-text-primary mb-3">For Brands & Agencies</h3>
+                        <h3 class="text-xl font-bold gradient-text mb-3">For Brands & Agencies</h3>
                         <ul class="space-y-2 text-secondary text-lg">
                             <li><strong class="text-white">Curated KOL Marketplace:</strong> 500+ pre‑audited KOLs.</li>
                             <li><strong class="text-white">Campaign Reports:</strong> Discover true performance.</li>
                             <li><strong class="text-white">Marketing Benefits:</strong> Know what actually works.</li>
                         </ul>
                     </div>
+                    <!-- This card also aligns correctly with its siblings -->
                     <div class="card p-6 text-left">
-                        <h3 class="text-xl font-bold text-text-primary mb-3">For Retail</h3>
+                        <h3 class="text-xl font-bold gradient-text mb-3">For Retail</h3>
                         <ul class="space-y-2 text-secondary text-lg">
                             <li><strong class="text-white">Know Who to Follow:</strong> Make informed trust decisions.</li>
                             <li><strong class="text-white">See Through Hype:</strong> Understand organic conversation vs. noise.</li>
@@ -281,7 +285,7 @@
 
             <!-- Slide 9 -->
             <section id="s9" class="slide">
-                <h2 class="text-3xl md:text-5xl font-bold mb-8">Results & <span class="gradient-text">Testimonials</span></h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 gradient-text">Results & Testimonials</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <blockquote class="card p-6 italic text-secondary">“WiseOne helped us identify the real impact of our KOL campaigns and saved thousands in wasted spend.”<cite class="block not-italic text-right font-bold text-white mt-4">— BitLayer Labs</cite></blockquote>
                     <blockquote class="card p-6 italic text-secondary">“The only platform that gave us true, actionable data on influencer performance.”<cite class="block not-italic text-right font-bold text-white mt-4">— Agency Client</cite></blockquote>
@@ -346,7 +350,7 @@
 
             <!-- Slide 11 -->
             <section id="s11" class="slide">
-                <h2 class="text-3xl md:text-5xl font-bold mb-8">Index Today & <span class="gradient-text">Get Started</span></h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 gradient-text">Index Today & Get Started</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <div class="card text-left">
                         <div>
@@ -416,3 +420,4 @@
 </script>
 </body>
 </html>
+
