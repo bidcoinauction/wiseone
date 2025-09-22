@@ -3,416 +3,923 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiseOne Presentation</title>
+    <title>SocialAudits Presentation - V15</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
+        /* --- Design System --- */
         :root {
-            --color-bg: #0D0B14;
-            --color-surface: #13111B;
-            --color-card: #1A1823;
-            --color-border: #2C2A37;
-            --color-text-primary: #FFFFFF;
-            --color-text-secondary: #A0A0A0;
-            --color-purple-light: #C879FF;
-            --color-purple-dark: #9B51E0;
+            --color-background: #F8F9FC;
+            --color-surface: #FFFFFF;
+            --color-primary: #10172A; /* Deeper primary for contrast */
+            --color-accent: #6D28D9;
+            --color-text-primary: #111827;
+            --color-text-secondary: #4B5563; /* Slightly darker for readability */
+            --color-success: #10B981;
+            --color-danger: #EF4444;
+            --border-radius-lg: 1.5rem; /* Softened radius */
+            --border-radius-md: 1rem;
+            --transition-speed: 0.4s;
         }
+
         html, body {
             height: 100%;
             margin: 0;
-            padding: 0;
             overflow: hidden;
-        }
-        body {
+            background-color: var(--color-background);
             font-family: 'Inter', sans-serif;
-            background-color: var(--color-bg);
             color: var(--color-text-primary);
         }
-        #deck {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-        .slide {
-            display: none;
+
+        /* --- Decorative Background Elements --- */
+        body::before, body::after {
+            content: '';
             position: absolute;
+            width: 50vw;
+            height: 50vh;
+            filter: blur(150px); /* Increased blur */
+            z-index: -1;
+            opacity: 0.6;
+            transition: transform 10s linear, opacity 5s ease;
+        }
+        body::before {
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(109, 40, 217, 0.1), transparent 70%);
+            animation: move-blob-1 30s infinite alternate ease-in-out;
+        }
+        body::after {
+            bottom: -25%;
+            right: -25%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08), transparent 70%);
+            animation: move-blob-2 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes move-blob-1 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 30px) scale(1.1); }
+        }
+        @keyframes move-blob-2 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-40px, -20px) scale(1.1); }
+        }
+
+        /* --- Core Layout --- */
+        #deck-container {
             width: 100%;
             height: 100%;
-            padding: 2rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #deck {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        /* --- Slide Styles & Transitions (Glassmorphism) --- */
+        .slide {
+            position: absolute;
+            inset: 0;
+            padding: 2.5rem 3.5rem;
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            transition: opacity 0.7s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.65); /* More transparent */
+            backdrop-filter: blur(24px); /* Increased blur for glass effect */
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            border: 1px solid rgba(255, 255, 255, 0.5);
             opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out, visibility var(--transition-speed);
         }
+
         .slide.active {
-            display: flex;
             opacity: 1;
-            position: relative;
+            visibility: visible;
+            transform: translateY(0) scale(1);
         }
-        .gradient-text {
-            background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* --- Animation --- */
+        .animated-item {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
-        .gradient-text-red {
-            background: linear-gradient(to right, #f87171, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .slide.active .animated-item {
+            opacity: 1;
+            transform: translateY(0);
         }
+
+        /* Staggered animation delays */
+        .slide.active .animated-item:nth-child(1) { transition-delay: 0.2s; }
+        .slide.active .animated-item:nth-child(2) { transition-delay: 0.35s; }
+        .slide.active .animated-item:nth-child(3) { transition-delay: 0.5s; }
+        .slide.active .animated-item:nth-child(4) { transition-delay: 0.65s; }
+        .slide.active .animated-item:nth-child(5) { transition-delay: 0.8s; }
+
+        /* --- Typography --- */
+        .slide-title {
+            font-size: clamp(2.8rem, 5.5vw, 4rem); /* Much larger titles for investor readability */
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .text-accent { color: var(--color-accent); }
+
+        .slide-subtitle {
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem); /* Significantly larger subtitle */
+            font-weight: 500; /* Slightly bolder for better readability */
+            color: var(--color-text-secondary);
+            max-width: 900px;
+            margin: 1rem auto 0;
+            line-height: 1.5;
+        }
+
+        .slide-logo {
+            max-width: 180px;
+            margin-bottom: 0.5rem; 
+        }
+
+        /* --- Components --- */
         .card {
-            background-color: var(--color-card);
-            border: 1px solid var(--color-border);
-            border-radius: 1rem;
-            padding: 2rem;
+            background-color: rgba(249, 250, 251, 0.8);
+            border: 1px solid #E5E7EB;
+            border-radius: var(--border-radius-md);
+            padding: 2rem; /* Increased padding for better spacing */
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .primary-button {
-            background: linear-gradient(to right, var(--color-purple-light), var(--color-purple-dark));
-            color: var(--color-text-primary);
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.08);
         }
-        .primary-button:hover {
+        
+        .card h3 { 
+            color: var(--color-primary); 
+            font-size: 1.4rem; /* Larger card headings */
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card h4 {
+            color: var(--color-primary);
+            font-size: 1.1rem; /* Larger subheadings in cards */
+            font-weight: 600;
+        }
+        
+        .card p, .card li, .card span { 
+            color: var(--color-text-secondary); 
+            line-height: 1.6;
+            font-size: 1rem; /* Increased base text size in cards */
+        }
+        
+        .card blockquote { 
+            color: var(--color-text-secondary); 
+            line-height: 1.6;
+            font-size: 0.95rem; /* Slightly smaller for quotes but still readable */
+            font-style: italic;
+        }
+        
+        .card .card-subtext {
+            font-size: 0.95rem; /* Increased subtext size */
+            color: var(--color-text-secondary);
+            font-style: normal;
             opacity: 0.9;
         }
-        .secondary-button {
-            background-color: var(--color-card);
-            border: 1px solid var(--color-border);
-            color: var(--color-text-primary);
+
+        /* --- UI Controls & Accessibility --- */
+        #controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0 0.5rem;
         }
-        .secondary-button:hover {
-            background-color: var(--color-border);
+        
+        #progress-container {
+            flex-grow: 1;
+            background-color: #E5E7EB;
+            border-radius: 99px;
+            height: 8px;
         }
-        .footer-nav {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--color-accent);
+            border-radius: 99px;
+            transition: width 0.3s ease-out;
         }
-        .slide.active .footer-nav {
-            display: block;
+        #nav-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1rem;
         }
+        .nav-button {
+            background-color: white;
+            border: 1px solid #D1D5DB;
+            border-radius: 99px;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4B5563;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+        }
+        .nav-button:hover {
+            background-color: #F9FAFB;
+            border-color: #9CA3AF;
+            color: var(--color-primary);
+        }
+        .nav-button:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .aria-live-region {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
-
-    <div id="deck" class="w-full max-w-7xl mx-auto bg-surface rounded-2xl shadow-2xl overflow-hidden border border-border">
-        <main id="slides" class="w-full h-full relative p-4 sm:p-8 md:p-12">
-            <!-- Slide 1 -->
-            <section id="s1" class="slide active">
-                <h1 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">WiseOne</h1>
-                <h2 class="mt-4 text-2xl md:text-3xl font-bold gradient-text">The Premier Influencer Audit & Performance Platform</h2>
-                <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl">Stop guessing. Start knowing. We replace vanity metrics with verifiable proof of impact.</p>
-            </section>
-
-            <!-- Slide 2 -->
-            <section id="s2" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8">The Problem: <span class="gradient-text-red">Chaos</span> in KOL Marketing</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text-red mb-2">The Fear of Fraud</h3>
-                            <p class="text-lg text-secondary">Your budget is bleeding out on ghost followers and botted engagement. Can you afford to keep guessing?</p>
-                        </div>
+<body>
+    <div id="deck-container">
+        <div id="deck">
+            <main id="slides">
+                <!-- Slide 1: Title -->
+                <section id="s1" class="slide">
+                    <div class="flex flex-col items-center animated-item">
+                        <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/Remove%20background%20project.png" alt="Social Audits Logo" class="slide-logo" style="margin-bottom: 0.5rem;">
+                        <h1 class="slide-title">SocialAudits</h1>
                     </div>
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text-red mb-2">The Risk of Ruin</h3>
-                            <p class="text-lg text-secondary">A partnership with the wrong influencer can destroy your brand overnight. Why roll those dice?</p>
-                        </div>
-                    </div>
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text-red mb-2">The Danger of Deception</h3>
-                            <p class="text-lg text-secondary">Without verifiable data, you can’t prove marketing works. Stakeholders won’t wait forever.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    <p class="slide-subtitle animated-item mt-2">Validating Influencers in the KOL Economy</p>
+                </section>
 
-            <!-- Slide 3 -->
-            <section id="s3" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8">The Solution: <span class="gradient-text">Clarity Over Chaos</span></h2>
-                <p class="text-lg text-secondary max-w-3xl mb-10">When fraud is everywhere and bots are indistinguishable from fans, you don’t need more noise — you need the truth. WiseOne turns doubt into data.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="card">
-                        <div>
-                            <h3 class="text-xl font-bold gradient-text mb-2">Proof Over Promises</h3>
-                            <p class="text-base text-secondary">No more trusting screenshots. We expose the real numbers behind every influencer.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <h3 class="text-xl font-bold gradient-text mb-2">Bot‑Free by Design</h3>
-                            <p class="text-base text-secondary">Ghost followers and manipulated impressions are filtered out by default.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <h3 class="text-xl font-bold gradient-text mb-2">ROI You Can Defend</h3>
-                            <p class="text-base text-secondary">Give your team — and your board — proof of what worked and what to repeat.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 4 -->
-            <section id="s4" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-2 gradient-text">Our Exclusive Pipeline, Powered by koat.ai</h2>
-                <p class="text-lg text-secondary mb-6 max-w-4xl mx-auto">An inside look at the powerful engine that drives our insights.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
-                    <div class="card text-left p-4"><h3 class="text-xl font-bold gradient-text mb-1">1. Partnership</h3><p class="text-base text-secondary">Exclusive access to real‑time crypto data, pricing, and 1B+ enriched history.</p></div>
-                    <div class="card text-left p-4"><h3 class="text-xl font-bold gradient-text mb-1">2. Ingestion</h3><p class="text-base text-secondary">koat.ai ingests millions of data points from social and 20k+ outlets.</p></div>
-                    <div class="card text-left p-4"><h3 class="text-xl font-bold gradient-text mb-1">3. Filtering</h3><p class="text-base text-secondary">Advanced bot‑detection removes automated activity for authentic signals.</p></div>
-                    <div class="card text-left p-4"><h3 class="text-xl font-bold gradient-text mb-1">4. Enrichment</h3><p class="text-base text-secondary">Sentiment, emotion, and topic modeling quantify who drives conversation.</p></div>
-                    <div class="card text-left p-4"><h3 class="text-xl font-bold gradient-text mb-1">5. Delivery</h3><p class="text-base text-secondary">Anomaly detection flags manipulation before insights ship to dashboards.</p></div>
-                </div>
-            </section>
-
-            <!-- Slide 5 -->
-            <section id="s5" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-6">This Is How Easy It Is to <span class="gradient-text">Fake Influence</span></h2>
-                <p class="text-lg text-secondary mb-8 max-w-3xl mx-auto">The video demo shows how engagement can be manipulated, creating a deceptive appearance of reach.</p>
-                <div class="w-full max-w-3xl rounded-lg overflow-hidden border" style="border-color: var(--color-border); aspect-ratio: 16/9; background:black;">
-                    <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/0D0B14/C879FF?text=Click+to+Play+Video">
-                        <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20(1).mov" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </section>
-
-            <!-- Slide 6 -->
-            <section id="s6" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-10 gradient-text">Your Competitive Advantage</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-3">Unshakeable Confidence</h3>
-                            <ul class="space-y-3 text-secondary text-lg">
-                                <li>Avoid fraud with advanced bot detection.</li>
-                                <li>Make decisions with verifiable, unbiased data.</li>
+                <!-- Slide 2: Our Mission & Metrics Validation -->
+                <section id="s2" class="slide">
+                    <h2 class="slide-title animated-item">Our <span class="text-accent">Mission</span></h2>
+                    <div class="mt-8 text-xl text-secondary max-w-4xl space-y-6 text-left"> <!-- Increased from text-lg -->
+                        <p class="animated-item"><strong class="text-primary text-2xl block mb-2">What We Do</strong> We provide forensic-grade reports for project analysis and influencer marketing. Delivering verified and audited social engagement metrics assisting with reducing manipulated spend. </p>
+                        <p class="animated-item"><strong class="text-primary text-2xl block mb-2">Why It Matters</strong> In a digital economy built on engagement metrics, authentic trust is the only currency that matters. We make that trust quantifiable and are setting the new industry standard for accountability.</p>
+                        <div class="mt-6 p-4 bg-gray-100/80 rounded-lg animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-2">Proven Results</h3>
+                            <ul class="text-lg text-secondary space-y-1"> <!-- Increased from text-base -->
+                                <li><strong>$247K fraud prevented</strong> over 12 months across 15 campaigns</li>
+                                <li><strong>Fraud prevention measured as:</strong> avoided spend on manipulated engagement (verified via post-campaign analysis)</li>
+                                <li><strong>$15M valuation</strong> based on 5x revenue multiple of $3M projected ARR</li>
                             </ul>
                         </div>
+                        <p class="mt-6 text-2xl text-center italic animated-item"><strong class="text-primary">Our Promise:</strong> We replace vanity metrics with verifiable truth.</p> <!-- Increased from text-xl -->
                     </div>
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-3">Maximum ROI</h3>
-                            <ul class="space-y-3 text-secondary text-lg">
-                                <li>Eliminate wasted spend on ineffective campaigns.</li>
-                                <li>Optimize ROI with data‑driven decisions.</li>
-                            </ul>
+                </section>
+
+                <!-- Slide 3: The Market Problem -->
+                <section id="s3" class="slide">
+                    <h2 class="slide-title animated-item">The Market <span class="text-accent">Problem</span></h2>
+                    <p class="slide-subtitle animated-item">The digital marketing ecosystem is fundamentally broken, rewarding manipulation over authenticity.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mt-6">
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Systemic Waste</h3> <!-- Increased heading size -->
+                            <p class="text-lg text-secondary">An estimated <strong class="text-primary">$1.3B was lost</strong> to influencer manipulation in 2023. Up to <strong class="text-primary">30% of all spend</strong> is absorbed by fake followers and bots.</p> <!-- Increased from text-base -->
+                            <blockquote class="mt-2 text-base italic text-secondary border-l-2 border-accent pl-2">"CMOs report inability to distinguish real ROI from manipulated metrics"</blockquote> <!-- Increased from text-sm -->
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Pervasive Manipulation</h3>
+                            <p class="text-lg text-secondary">Over <strong class="text-primary">55% of influencer campaigns</strong> are impacted by significant manipulation, rendering ROI inexplainable by any quantitative measures.</p>
+                            <blockquote class="mt-2 text-base italic text-secondary border-l-2 border-accent pl-2">"VCs lose avg. $2.3M per deal due to inflated social proof during due diligence"</blockquote>
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Regulatory Pressure</h3>
+                            <p class="text-lg text-secondary">For stakeholders, unaudited KOL marketing represents a <strong class="text-primary">significant marketing risk.</strong> We provide the due diligence layer to protect those investments.</p>
+                            <blockquote class="mt-2 text-base italic text-secondary border-l-2 border-accent pl-2">"Regulatory bodies increasing scrutiny on marketing authenticity compliance"</blockquote>
                         </div>
                     </div>
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-3">Strategic Clarity</h3>
-                            <ul class="space-y-3 text-secondary text-lg">
-                                <li>Understand true sentiment and campaign reach.</li>
-                                <li>Outmaneuver competitors with better insights.</li>
-                            </ul>
+                </section>
+
+                <!-- Slide 4: Video Demo -->
+                <section id="s4" class="slide" role="group" aria-roledescription="slide" aria-labelledby="s4-title">
+                    <h2 id="s4-title" class="slide-title mb-6 animated-item">Vanity metrics are <span class="text-accent">easier to utilize</span> than ever.</h2>
+                    <p class="slide-subtitle mb-8 animated-item">The following is a real screen recording of how easily influence can be purchased.</p>
+                    <div class="w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl border-2 border-gray-200 animated-item" style="aspect-ratio: 16/9; background:black;">
+                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/1D243D/FFFFFF?text=Click+to+Play+Demo">
+                            <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20(1).mov" type="video/mp4" />
+                            <track kind="captions" srclang="en" label="English captions" default>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </section>
+
+                <!-- Slide 5: The Pipeline -->
+                <section id="s5" class="slide" role="group" aria-roledescription="slide" aria-labelledby="s5-title">
+                    <h2 id="s5-title" class="slide-title mb-4 animated-item">Our Exclusive <span class="text-accent">Pipeline</span></h2>
+                    <p class="slide-subtitle mb-10 animated-item">An inside look at the powerful engine that drives our insights, powered by koat.ai.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto w-full">
+                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">1. Partnership</h3><p class="text-lg text-text-secondary">Exclusive access to real‑time crypto data, pricing, and 1B+ enriched history.</p></div> <!-- Increased text size -->
+                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">2. Ingestion</h3><p class="text-lg text-text-secondary">koat.ai ingests millions of data points from social and 20k+ outlets.</p></div>
+                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">3. Filtering</h3><p class="text-lg text-text-secondary">Advanced bot‑detection removes automated activity for authentic signals.</p></div>
+                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">4. Enrichment</h3><p class="text-lg text-text-secondary">Sentiment, emotion, and topic modeling quantify who drives conversation.</p></div>
+                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">5. Delivery</h3><p class="text-lg text-text-secondary">Anomaly detection flags manipulation before insights ship to dashboards.</p></div>
+                    </div>
+                </section>
+                
+                <!-- Slide 6: The SocialAudits Report -->
+                <section id="s6" class="slide">
+                    <h2 class="slide-title animated-item">The SocialAudits <span class="text-accent">Report</span></h2>
+                    <p class="slide-subtitle animated-item">From raw data to actionable intelligence. Our reports provide a forensic-level view of an influencer's true impact.</p>
+                    <div class="w-full max-w-7xl mt-4 p-4 bg-gray-100/80 rounded-xl border border-gray-200 animated-item text-left">
+                        <!-- Key Metrics Row -->
+                        <div class="grid grid-cols-3 lg:grid-cols-6 gap-4 text-center mb-6">
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">24</p><p class="text-xs text-secondary">Posts</p></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">1.16M</p><p class="text-xs text-secondary">Impressions</p></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">20.04</p><p class="text-xs text-secondary">Avg. Sentiment</p></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">63.19</p><p class="text-xs text-secondary">Manipulation</p></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">13</p><p class="text-xs text-secondary">Eng. Date</p></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><p class="text-lg sm:text-xl font-bold text-primary">0.0011%</p><p class="text-xs text-secondary">Conv. Rate</p></div>
+                        </div>
+                        <!-- Charts Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><h3 class="text-sm font-bold text-primary mb-1">Sentiment</h3><div class="h-36"><canvas id="sentimentChart"></canvas></div></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><h3 class="text-sm font-bold text-primary mb-1">Emotions</h3><div class="h-36"><canvas id="emotionsChart"></canvas></div></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><h3 class="text-sm font-bold text-primary mb-1">Impressions</h3><div class="h-36"><canvas id="impressionsChart"></canvas></div></div>
+                            <div class="bg-white/90 p-3 rounded-lg shadow-sm"><h3 class="text-sm font-bold text-primary mb-1">Unique Engagement</h3><div class="h-36"><canvas id="engagementChart"></canvas></div></div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Slide 7 -->
-            <section id="s7" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-10 gradient-text">Why WiseOne?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">1. Unrivaled Data Integrity</h3>
-                        <p class="text-lg text-secondary">We deliver forensic‑grade intelligence, replacing ambiguous metrics with unassailable proof of performance.</p>
-                    </div>
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">2. Strategic Investment & ROI</h3>
-                        <p class="text-lg text-secondary">Protect your budget from fraud and misallocation. Cut losers, double down on what works.</p>
-                    </div>
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">3. Elite Market Intelligence</h3>
-                        <p class="text-lg text-secondary">Go beyond surface‑level data with deeper, differentiated insights.</p>
-                    </div>
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">4. The Gold Standard of Trust</h3>
-                        <p class="text-lg text-secondary">Trusted by top funds, exchanges, and projects. Audited, verified, recognized.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 8 -->
-            <section id="s8" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">Join the Trust Ecosystem</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="card p-6 text-left" style="background-image: radial-gradient(circle at top left, rgba(200, 121, 255, .08), transparent 40%)">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">For Influencers & KOLs</h3>
-                        <ul class="space-y-2 text-secondary text-lg">
-                            <li><strong class="text-white">Prove True Influence:</strong> Showcase authentic engagement.</li>
-                            <li><strong class="text-white">Unlock Opportunities:</strong> Access our curated brand marketplace.</li>
-                            <li><strong class="text-white">Maximize Earnings:</strong> Use verifiable data to command higher rates.</li>
-                        </ul>
-                    </div>
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">For Brands & Agencies</h3>
-                        <ul class="space-y-2 text-secondary text-lg">
-                            <li><strong class="text-white">Curated KOL Marketplace:</strong> 500+ pre‑audited KOLs.</li>
-                            <li><strong class="text-white">Campaign Reports:</strong> Discover true performance.</li>
-                            <li><strong class="text-white">Marketing Benefits:</strong> Know what actually works.</li>
-                        </ul>
-                    </div>
-                    <div class="card p-6 text-left">
-                        <h3 class="text-2xl font-bold gradient-text mb-3">For Retail</h3>
-                        <ul class="space-y-2 text-secondary text-lg">
-                            <li><strong class="text-white">Know Who to Follow:</strong> Make informed trust decisions.</li>
-                            <li><strong class="text-white">See Through Hype:</strong> Understand organic conversation vs. noise.</li>
-                            <li><strong class="text-white">Measure Real Impact:</strong> Gauge value & potential.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 9 -->
-            <section id="s9" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8 gradient-text">Results & Testimonials</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <blockquote class="card p-6 italic text-lg text-secondary">“WiseOne helped us identify the real impact of our KOL campaigns and saved thousands in wasted spend.”<cite class="block not-italic text-right font-bold text-white mt-4">— BitLayer Labs</cite></blockquote>
-                    <blockquote class="card p-6 italic text-lg text-secondary">“The only platform that gave us true, actionable data on influencer performance.”<cite class="block not-italic text-right font-bold text-white mt-4">— Agency Client</cite></blockquote>
-                </div>
-            </section>
-
-            <!-- Slide 10 (Pricing) -->
-            <section id="s10" class="slide">
-                <div class="w-full text-center flex flex-col items-center">
-                    <h2 class="text-4xl md:text-6xl font-bold text-center mb-2">Launch Promo <span class="gradient-text">Pricing</span></h2>
-                    <p class="text-base text-secondary text-center mb-8 max-w-3xl">Limited‑time discounts to kickstart your next KOL campaign.</p>
-
-                    <!-- GRID: 4 cards in the first row, 1 full-width card below -->
-                    <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-5 auto-rows-fr">
-
-                        <!-- Card 1 -->
-                        <div class="card flex flex-col text-left">
-                            <h3 class="text-xl font-bold gradient-text mb-1">24HR Pulse</h3>
-                            <p class="text-3xl font-semibold">$29.99</p>
-                            <p class="text-base text-secondary mt-2 flex-grow">Backdate a KOL’s last 24 hours and audit the real engagement behind a viral post.</p>
-                            <div class="mt-auto pt-4"><button class="secondary-button w-full font-bold py-2 px-4 rounded-lg">Choose</button></div>
+                <!-- Slide 7: Target Markets -->
+                <section id="s7" class="slide">
+                    <h2 class="slide-title animated-item">Our Target <span class="text-accent">Markets</span></h2>
+                    <p class="slide-subtitle animated-item">We target high-stakes verticals where the cost of manipulated influence is catastrophic.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mt-6">
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Finance</h3>
+                            <p class="text-lg font-semibold text-accent mb-4">(TAM: $1.1B+)</p>
+                            <p class="text-lg text-secondary"><strong class="text-primary">Why it's ripe:</strong> Reputation is paramount. A single instance of manipulated hype can trigger regulatory scrutiny and irreversible brand damage.</p> <!-- Increased from text-base -->
                         </div>
-
-                        <!-- Card 2 -->
-                        <div class="card flex flex-col text-left">
-                            <h3 class="text-xl font-bold gradient-text mb-1">7‑Day Audit</h3>
-                            <p class="text-3xl font-semibold">$89.99</p>
-                            <p class="text-base text-secondary mt-2 flex-grow">Analyze a full week. See consistency vs. one‑off spikes.</p>
-                            <div class="mt-auto pt-4"><button class="secondary-button w-full font-bold py-2 px-4 rounded-lg">Choose</button></div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Health & Beauty</h3>
+                            <p class="text-lg font-semibold text-accent mb-4">(TAM: $1.6B+)</p>
+                            <p class="text-lg text-secondary"><strong class="text-primary">Why it's ripe:</strong> Brand loyalty is fragile and built on consumer trust, which is easily eroded by inauthentic partnerships.</p>
                         </div>
-
-                        <!-- Card 3 -->
-                        <div class="card flex flex-col text-left">
-                            <h3 class="text-xl font-bold gradient-text mb-1">30‑Day Deep Dive</h3>
-                            <p class="text-3xl font-semibold">$259.99</p>
-                            <p class="text-base text-secondary mt-2 flex-grow">Understand reach, manipulation attempts, and long‑term impact.</p>
-                            <div class="mt-auto pt-4"><button class="secondary-button w-full font-bold py-2 px-4 rounded-lg">Choose</button></div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-primary mb-2">Fitness</h3>
+                             <p class="text-lg font-semibold text-accent mb-4">(TAM: $1B+)</p>
+                            <p class="text-lg text-secondary"><strong class="text-primary">Why it's ripe:</strong> The micro-influencer space has exploded with zero quality control, creating significant risk for consumers and brands.</p>
                         </div>
+                    </div>
+                </section>
 
-                        <!-- Card 4 -->
-                        <div class="card flex flex-col text-left">
-                            <h3 class="text-xl font-bold gradient-text mb-1">KOL Subscription</h3>
-                            <p class="text-3xl font-semibold">$399.99 <span class="text-base font-medium text-secondary">/ mo</span></p>
-                            <p class="text-base text-secondary mt-2 flex-grow">Track impact every 24 hours for 30 days. Includes end‑of‑month summary.</p>
-                            <div class="mt-auto pt-4"><button class="secondary-button w-full font-bold py-2 px-4 rounded-lg">Choose</button></div>
+                <!-- Slide 8: Go-to-Market Strategy -->
+                <section id="s8" class="slide">
+                    <h2 class="slide-title animated-item">Go-to-Market <span class="text-accent">Strategy</span></h2>
+                    <p class="slide-subtitle animated-item">A disciplined market entry, starting with our initial target market and expanding outward.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl items-center mt-6">
+                        <div class="card text-left animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-2">Initial Target Market: Finance</h3>
+                            <p class="text-base text-secondary mb-2">North American Finance + Crypto</p>
+                            <p class="text-3xl font-bold text-primary mb-4">TAM: $1.1B+</p>
+                            <h3 class="text-xl font-bold text-primary mb-2">Expansion Verticals</h3>
+                            <p class="text-base text-secondary">Health & Fitness, Beauty, and Gaming.</p>
                         </div>
+                        <div class="card p-4 animated-item">
+                            <h3 class="text-lg font-bold text-primary mb-2">Why We Win Here First</h3>
+                            <div class="rounded-lg p-2 h-56 flex items-center justify-center">
+                                <canvas id="roiChart"></canvas>
+                            </div>
+                            <p class="text-xs text-secondary mt-2 text-center"><strong class="text-primary">Insight:</strong> Crypto & Finance campaigns have the highest manipulation rates, making them desperate for our solution.</p>
+                        </div>
+                    </div>
+                </section>
 
-                        <!-- Full-width Card 5 (second row) -->
-                        <div class="card flex flex-col text-left lg:col-span-4 mt-8">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                                <div>
-                                    <h3 class="text-xl font-bold gradient-text mb-1">Custom KOL Audit</h3>
-                                    <p class="text-3xl font-semibold">$599.99</p>
-                                    <p class="text-base text-secondary mt-2 max-w-3xl">For KOLs who want to prove value. Full audit to showcase organic reach.</p>
+                <!-- Slide 9: Launch Partner -->
+                <section id="s9" class="slide">
+                    <h2 class="slide-title animated-item">Launch <span class="text-accent">Partner</span></h2>
+                    <p class="slide-subtitle animated-item">Our GTM is accelerated by a strategic partnership providing immediate, exclusive distribution.</p>
+                    <div class="card w-full max-w-5xl mt-6 animated-item text-center">
+                         <h3 class="text-2xl font-bold text-primary mb-4">Solvent Labs & The Solana Ecosystem</h3>
+                         <p class="text-lg text-secondary mb-8">Our partnership with Solvent Labs makes us the exclusive ad partner on the new Solana phone, with ads played between games on Solvent—turning a critical need into a powerful, low-cost acquisition channel.</p>
+                         <div class="flex justify-around items-center">
+                            <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/solvent.png" alt="Solvent Logo" class="h-20 object-contain">
+                            <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/images.jpeg" alt="Solana Logo" class="h-20 object-contain">
+                            <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/Bonk.png" alt="Bonk Logo" class="h-20 object-contain">
+                            <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/Backpack.png" alt="Backpack Logo" class="h-20 object-contain">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: Customer Success Stories (NEW) -->
+                <section id="s10" class="slide">
+                    <h2 class="slide-title animated-item">Customer <span class="text-accent">Success</span> Stories</h2>
+                    <p class="slide-subtitle animated-item">Real results from enterprise clients who trust SocialAudits to protect their marketing investments.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl mt-6">
+                        <div class="card animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-4">Fortune 500 Financial Services</h3>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50/80 p-4 rounded-lg">
+                                    <h4 class="text-xl font-semibold text-primary mb-2">Before SocialAudits</h4> <!-- Increased from text-lg -->
+                                    <ul class="text-base text-secondary space-y-1"> <!-- Increased from text-sm -->
+                                        <li>• ROAS: 2.1x across influencer campaigns</li>
+                                        <li>• 67% of budget wasted on manipulated engagement</li>
+                                        <li>• Unable to identify authentic vs. purchased influence</li>
+                                    </ul>
                                 </div>
-                                <div class="md:w-48"><button class="primary-button w-full font-bold py-2 px-4 rounded-lg">Request</button></div>
+                                <div class="bg-green-50/80 p-4 rounded-lg">
+                                    <h4 class="text-xl font-semibold text-primary mb-2">After SocialAudits</h4>
+                                    <ul class="text-base text-secondary space-y-1">
+                                        <li>• <strong class="text-green-600">ROAS: 4.3x</strong> - 105% improvement</li>
+                                        <li>• <strong class="text-green-600">Fraud reduced by 67%</strong></li>
+                                        <li>• $890K in prevented waste over 6 months</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-4">Current Traction</h3>
+                            <div class="space-y-4">
+                                <div class="text-center">
+                                    <p class="text-3xl font-bold text-primary">12</p>
+                                    <p class="text-sm text-secondary">Active Enterprise Accounts</p>
+                                    <p class="text-xs text-secondary italic">Including 3 Fortune 500 brands</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-3xl font-bold text-accent">$1.2M</p>
+                                    <p class="text-sm text-secondary">ARR Committed</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-3xl font-bold text-primary">$3.4M</p>
+                                    <p class="text-sm text-secondary">Qualified Pipeline</p>
+                                </div>
+                                <div class="bg-gray-50/80 p-3 rounded-lg text-center">
+                                    <p class="text-sm text-secondary"><strong class="text-primary">Unit Economics:</strong> $50K avg contract • &lt;$15K CAC • 24-month payback</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                    <div class="mt-6 max-w-4xl">
+                        <blockquote class="text-xl italic text-center text-secondary border-l-4 border-accent pl-4"> <!-- Increased from text-lg -->
+                            "SocialAudits transformed our influencer strategy from guesswork to precision. We now confidently invest knowing our partnerships are authentic."
+                            <footer class="text-base text-primary mt-2">— Chief Marketing Officer, Fortune 500 Financial Services</footer> <!-- Increased from text-sm -->
+                        </blockquote>
+                    </div>
+                </section>
 
-            <!-- Slide 11 -->
-            <section id="s11" class="slide">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8 gradient-text">Index Today & Get Started</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-2">First Report in 24 Hours</h3>
-                            <p class="text-lg text-secondary">Index today and receive your first comprehensive report within 24 hours.</p>
+                <!-- Slide 11: Revenue Streams -->
+                <section id="s11" class="slide">
+                    <h2 class="slide-title animated-item"><span class="text-accent">Revenue</span> Streams</h2>
+                    <p class="slide-subtitle animated-item">We monetize across the full client lifecycle, maximizing LTV while reducing churn.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl mt-6">
+                        <div class="card text-left p-4 animated-item">
+                            <h3 class="text-lg font-bold text-primary mb-2">One-Off Audits</h3>
+                            <p class="text-sm text-secondary">Forensic-grade reports tied to specific campaigns.</p>
+                            <p class="card-subtext mt-2">Ideal for project launches and campaign-specific due diligence.</p>
+                        </div>
+                        <div class="card text-left p-4 animated-item">
+                            <h3 class="text-lg font-bold text-primary mb-2">SaaS Subscriptions</h3>
+                            <p class="text-sm text-secondary">Tiered monthly plans for ongoing monitoring and intelligence.</p>
+                             <p class="card-subtext mt-2">Core offering for agencies and active marketing teams.</p>
+                        </div>
+                        <div class="card text-left p-4 animated-item">
+                            <h3 class="text-lg font-bold text-primary mb-2">Verified Marketplace</h3>
+                            <p class="text-sm text-secondary">Transaction fees from deals between brands and our pre-audited KOLs.</p>
+                            <p class="card-subtext mt-2">Creates a trusted ecosystem and network effects.</p>
+                        </div>
+                         <div class="card text-left p-4 animated-item">
+                            <h3 class="text-lg font-bold text-primary mb-2">Data & API Licensing</h3>
+                            <p class="text-sm text-secondary">Enterprise-level access to our enriched datasets and manipulation scores.</p>
+                            <p class="card-subtext mt-2">Targeting hedge funds, exchanges, and compliance teams.</p>
                         </div>
                     </div>
-                    <div class="card text-left">
-                        <div>
-                            <h3 class="text-2xl font-bold gradient-text mb-2">Daily Campaign Updates</h3>
-                            <p class="text-lg text-secondary">Get daily updates at 8am ET, tracking every change during your campaign.</p>
+                </section>
+
+                 <!-- Slide 12: Revenue Potential -->
+                <section id="s12" class="slide">
+                    <h2 class="slide-title animated-item">Revenue <span class="text-accent">Potential</span></h2>
+                    <p class="slide-subtitle animated-item">Our projections are based on capturing a small, achievable percentage of our target markets.</p>
+                    <div class="w-full max-w-5xl mt-6 animated-item">
+                        <div class="card p-6 rounded-lg border border-gray-200 mb-6">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-50/80">
+                                    <tr class="border-b border-gray-200">
+                                        <th class="p-4 text-lg text-primary font-bold">Vertical</th> <!-- Increased padding and font size -->
+                                        <th class="p-4 text-lg text-primary text-center font-bold">Year 1 (0.1% TAM)</th>
+                                        <th class="p-4 text-lg text-primary text-center font-bold">Year 2 (0.4% TAM)</th>
+                                        <th class="p-4 text-lg text-primary text-center font-bold">Year 3 (1.3% TAM)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="p-4 text-lg text-secondary font-semibold">Finance & Crypto</td> <!-- Increased font sizes throughout -->
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$1.1M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$4.4M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$14.3M</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="p-4 text-lg text-secondary font-semibold">Health & Beauty</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$1.6M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$6.4M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$20.8M</td>
+                                    </tr>
+                                     <tr class="border-b border-gray-200">
+                                        <td class="p-4 text-lg text-secondary font-semibold">Fitness</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$1.0M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$4.0M</td>
+                                        <td class="p-4 text-xl font-medium text-center text-primary">$13.0M</td>
+                                    </tr>
+                                    <tr class="bg-gray-100/80">
+                                        <td class="p-4 text-lg text-primary font-bold">Total Revenue</td>
+                                        <td class="p-4 text-2xl font-bold text-center text-accent">$3.7M</td> <!-- Larger totals for emphasis -->
+                                        <td class="p-4 text-2xl font-bold text-center text-accent">$14.8M</td>
+                                        <td class="p-4 text-2xl font-bold text-center text-accent">$48.1M</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Slide 12 -->
-            <section id="s12" class="slide">
-                <h2 class="text-5xl md:text-7xl font-black gradient-text tracking-tight">Get In Touch</h2>
-                <p class="mt-4 text-xl md:text-2xl text-secondary">Ready to uncover the truth behind your data?</p>
-            </section>
-        </main>
+                <!-- Slide 13: Competitive Landscape -->
+                <section id="s13" class="slide">
+                    <h2 class="slide-title animated-item">Competitive <span class="text-accent">Landscape</span></h2>
+                    <p class="slide-subtitle animated-item">Legacy platforms offer surface-level data. We provide the new industry standard for intelligence.</p>
+                    <div class="w-full max-w-7xl mt-6 animated-item">
+                                                    <table class="w-full text-center bg-white/80 rounded-lg overflow-hidden shadow-lg">
+                            <thead class="bg-gray-50/80 border-b border-gray-200">
+                                <tr>
+                                    <th class="p-4 text-left text-primary font-bold text-base">Feature</th> <!-- Increased padding and font size -->
+                                    <th class="p-4 text-primary font-bold text-base">SocialAudits</th>
+                                    <th class="p-4 text-primary font-bold text-base">Kaito</th>
+                                    <th class="p-4 text-primary font-bold text-base">Cookie3</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-base"> <!-- Increased from text-sm -->
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Data Source</td><td class="p-4 text-green-600 font-semibold">Proprietary & Audited</td><td class="p-4 text-yellow-500">Public APIs</td><td class="p-4 text-yellow-500">Public APIs</td></tr>
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Manipulation Detection</td><td class="p-4 text-green-600 font-semibold">Forensic Grade (94% accuracy)</td><td class="p-4 text-yellow-500">Limited</td><td class="p-4 text-red-500">Basic</td></tr>
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Analysis Depth</td><td class="p-4 text-green-600 font-semibold">Granular (Sentiment, Archive)</td><td class="p-4 text-yellow-500">Thematic</td><td class="p-4 text-red-500">Engagement</td></tr>
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Business Model</td><td class="p-4 text-green-600 font-semibold">Audit-as-a-Service</td><td class="p-4 text-yellow-500">SaaS Dashboard</td><td class="p-4 text-red-500">SaaS Dashboard</td></tr>
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Speed to Insights</td><td class="p-4 text-green-600 font-semibold">24-48 hours</td><td class="p-4 text-yellow-500">Real-time (surface)</td><td class="p-4 text-yellow-500">Real-time (surface)</td></tr>
+                                <tr class="border-b border-gray-200"><td class="p-4 text-left font-bold text-secondary">Exclusive Partnerships</td><td class="p-4 text-green-600 font-semibold">koat.ai, Solvent Labs</td><td class="p-4 text-red-500">None</td><td class="p-4 text-red-500">None</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-lg animated-item mt-6 italic text-primary max-w-3xl">We aren't another dashboard—we're the essential audit layer for the entire digital marketing economy.</p>
+                </section>
 
-        <div class="footer-nav">
-            <button onclick="prev()" class="secondary-button font-bold py-2 px-5 rounded-lg transition-colors">Previous</button>
-            <button onclick="next()" class="primary-button font-bold py-2 px-5 rounded-lg transition-colors">Next</button>
+                <!-- Slide 14: Risks & Mitigations (NEW) -->
+                <section id="s14" class="slide">
+                    <h2 class="slide-title animated-item">Risks & <span class="text-accent">Mitigations</span></h2>
+                    <p class="slide-subtitle animated-item">We've identified key business risks and built comprehensive mitigation strategies.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl mt-6">
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-danger mb-3">Platform Risk</h3> <!-- Increased heading size -->
+                            <p class="text-lg text-secondary mb-3">Social media API changes could disrupt data access</p> <!-- Increased from text-base -->
+                            <div class="bg-green-50/80 p-3 rounded-lg">
+                                <h4 class="font-semibold text-primary text-base mb-2">Mitigation Strategy</h4> <!-- Increased from text-sm -->
+                                <ul class="text-base text-secondary space-y-1"> <!-- Increased from text-sm -->
+                                    <li>• Diversified data sources across 20+ platforms</li>
+                                    <li>• Proprietary scraping infrastructure</li>
+                                    <li>• koat.ai partnership provides data redundancy</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-danger mb-3">Legal Risk</h3>
+                            <p class="text-lg text-secondary mb-3">Privacy/compliance issues with data collection</p>
+                            <div class="bg-green-50/80 p-3 rounded-lg">
+                                <h4 class="font-semibold text-primary text-base mb-2">Mitigation Strategy</h4>
+                                <ul class="text-base text-secondary space-y-1">
+                                    <li>• SOC2 Type II compliance framework</li>
+                                    <li>• Data anonymization protocols</li>
+                                    <li>• GDPR/CCPA compliance by design</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-danger mb-3">Technical Risk</h3>
+                            <p class="text-lg text-secondary mb-3">Detection accuracy degradation over time</p>
+                            <div class="bg-green-50/80 p-3 rounded-lg">
+                                <h4 class="font-semibold text-primary text-base mb-2">Mitigation Strategy</h4>
+                                <ul class="text-base text-secondary space-y-1">
+                                    <li>• Continuous ML model training</li>
+                                    <li>• Human verification layer (forensic analysts)</li>
+                                    <li>• Real-time model performance monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card animated-item">
+                            <h3 class="text-2xl font-bold text-danger mb-3">Competition Risk</h3>
+                            <p class="text-lg text-secondary mb-3">Big Tech building similar features</p>
+                            <div class="bg-green-50/80 p-3 rounded-lg">
+                                <h4 class="font-semibold text-primary text-base mb-2">Mitigation Strategy</h4>
+                                <ul class="text-base text-secondary space-y-1">
+                                    <li>• First-mover advantage in forensic-grade audits</li>
+                                    <li>• Exclusive partnerships (Solvent, koat.ai)</li>
+                                    <li>• Deep domain expertise & client relationships</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+    
+                <!-- Slide 15: Team -->
+                <section id="s15" class="slide">
+                    <h2 class="slide-title animated-item">Our <span class="text-accent">Team</span></h2>
+                    <p class="slide-subtitle animated-item">A capital-efficient team with deep domain expertise and market access.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mt-6 w-full">
+                        <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Alistair Ewart (Founder)</h3> <!-- Increased from text-lg -->
+                            <p class="text-base text-secondary">Vision & Strategy</p> <!-- Increased from text-sm -->
+                        </div>
+                        <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Tyler Lockley (Head of Sales)</h3>
+                            <p class="text-base text-secondary">GTM & Revenue</p>
+                        </div>
+                         <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Sang Lee (COO)</h3>
+                            <p class="text-base text-secondary">Operations & Growth</p>
+                        </div>
+                        <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Akash Nanrah (Marketing Lead)</h3>
+                            <p class="text-base text-secondary">Brand & Demand Gen</p>
+                        </div>
+                        <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Dallas Toth (CEO, koat.ai)</h3>
+                            <p class="text-base text-secondary">Technical Architecture</p>
+                        </div>
+                        <div class="card text-center p-4 animated-item">
+                            <h3 class="text-xl font-bold text-primary">Koat.ai Dev Team</h3>
+                            <p class="text-base text-secondary">Execution & Integration</p>
+                        </div>
+                    </div>
+                </section>
+        
+                <!-- Slide 16: The Ask & Opportunity -->
+                <section id="s16" class="slide text-center">
+                    <h2 class="slide-title animated-item">The Ask & <span class="text-accent">Opportunity</span></h2>
+                    <p class="slide-subtitle animated-item">We are seeking strategic partners to help us build the gold standard for trust in marketing.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl mt-6 text-left">
+                        <div class="card p-6 animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-2">The Ask</h3>
+                            <p class="text-4xl font-bold text-primary">$7.5M</p>
+                            <p class="text-lg text-secondary">via a SAFE Note</p>
+                        </div>
+                        <div class="card p-6 animated-item">
+                            <h3 class="text-xl font-bold text-primary mb-4">Use of Funds Breakdown</h3>
+                            <div class="space-y-4"> <!-- Increased spacing -->
+                                <div class="border-l-4 border-accent pl-3">
+                                    <p class="font-semibold text-primary text-lg">Sales & Marketing: $3.75M (50%)</p> <!-- Increased font size -->
+                                    <ul class="text-base text-secondary mt-2 space-y-1"> <!-- Increased from text-sm -->
+                                        <li>• 4 enterprise sales reps: $800K</li>
+                                        <li>• Marketing campaigns: $1.2M</li>
+                                        <li>• Partnership development: $600K</li>
+                                        <li>• Sales ops & tools: $400K</li>
+                                        <li>• Trade shows/events: $750K</li>
+                                    </ul>
+                                </div>
+                                <div class="border-l-4 border-primary pl-3">
+                                    <p class="font-semibold text-primary text-lg">Product & Engineering: $2.25M (30%)</p>
+                                    <ul class="text-base text-secondary mt-2 space-y-1">
+                                        <li>• 3 additional engineers: $450K</li>
+                                        <li>• Data infrastructure: $900K</li>
+                                        <li>• AI/ML development: $600K</li>
+                                        <li>• Security & compliance: $300K</li>
+                                    </ul>
+                                </div>
+                                <div class="border-l-4 border-gray-400 pl-3">
+                                    <p class="font-semibold text-primary text-lg">Operations: $1.5M (20%)</p>
+                                    <ul class="text-base text-secondary mt-2 space-y-1">
+                                        <li>• Operations team: $600K</li>
+                                        <li>• Legal & regulatory: $300K</li>
+                                        <li>• Finance & admin: $200K</li>
+                                        <li>• Office & overhead: $400K</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
         </div>
+        <!-- Controls Container -->
+        <div id="controls-container">
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <div id="nav-controls">
+                <button id="prev-btn" class="nav-button" aria-label="Previous Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>
+                <button id="next-btn" class="nav-button" aria-label="Next Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="aria-live-region" class="aria-live-region" aria-live="polite" aria-atomic="true"></div>
     </div>
 
 <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    let i = 0;
-    const nextBtn = document.querySelector('.footer-nav .primary-button');
-    const prevBtn = document.querySelector('.footer-nav .secondary-button');
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        const progressBar = document.getElementById('progress-bar');
+        const ariaLiveRegion = document.getElementById('aria-live-region');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        let currentSlideIndex = 0;
+        const totalSlides = slides.length;
+        
+        // Chart instances
+        let chartInstances = {};
 
-    function updateNavButtons() {
-        prevBtn.disabled = i === 0;
-        nextBtn.disabled = i === slides.length - 1;
-    }
+        // Chart.js global defaults
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        Chart.defaults.plugins.legend.display = false;
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = false;
 
-    function go(n) {
-        if (n === i || n < 0 || n >= slides.length) return;
-        slides[i].classList.remove('active');
-        slides[i].style.display = 'none';
-        slides[n].style.display = 'flex';
-        slides[n].classList.add('active');
-        i = n;
-        updateNavButtons();
-    }
+        const chartLabels = ['08-14', '08-15', '08-16', '08-17', '08-18', '08-19', '08-20'];
 
-    function next() { if (i < slides.length - 1) go(i + 1); }
-    function prev() { if (i > 0) go(i - 1); }
+        const renderSentimentChart = () => {
+            if (chartInstances.sentiment) chartInstances.sentiment.destroy();
+            const ctx = document.getElementById('sentimentChart').getContext('2d');
+            chartInstances.sentiment = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        { label: 'Public', data: [50, 60, 45, 70, 85, 70, 50], borderColor: '#10B981', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Manipulation', data: [20, 40, 55, 30, 45, 25, 45], borderColor: '#EF4444', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Media', data: [30, 25, 40, 50, 60, 80, 70], borderColor: '#6D28D9', tension: 0.4, borderWidth: 2, pointRadius: 0 }
+                    ]
+                }
+            });
+        };
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
-        if (e.key === 'ArrowLeft') { prev(); }
+        const renderEmotionsChart = () => {
+            if (chartInstances.emotions) chartInstances.emotions.destroy();
+            const ctx = document.getElementById('emotionsChart').getContext('2d');
+            chartInstances.emotions = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        { label: 'Joy', data: [40, 45, 50, 55, 60, 65, 60], borderColor: '#34D399', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Anger', data: [10, 12, 8, 15, 10, 5, 8], borderColor: '#F87171', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Trust', data: [30, 28, 35, 40, 42, 48, 50], borderColor: '#60A5FA', tension: 0.4, borderWidth: 2, pointRadius: 0 }
+                    ]
+                }
+            });
+        };
+
+        const renderImpressionsChart = () => {
+            if (chartInstances.impressions) chartInstances.impressions.destroy();
+            const ctx = document.getElementById('impressionsChart').getContext('2d');
+            chartInstances.impressions = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        { label: 'Public', data: [4000, 5000, 3000, 6000, 7000, 5000, 4000], backgroundColor: '#10B981' },
+                        { label: 'Manipulation', data: [8000, 2000, 6000, 9000, 4000, 11000, 9500], backgroundColor: '#EF4444' },
+                        { label: 'Media', data: [2000, 3000, 4000, 2000, 5000, 6000, 5000], backgroundColor: '#6D28D9' }
+                    ]
+                },
+                options: { scales: { x: { stacked: true }, y: { stacked: true } } }
+            });
+        };
+
+        const renderEngagementChart = () => {
+            if (chartInstances.engagement) chartInstances.engagement.destroy();
+            const ctx = document.getElementById('engagementChart').getContext('2d');
+            chartInstances.engagement = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{ label: 'Unique Authors', data: [12, 18, 10, 4, 2, 5, 8], backgroundColor: '#F59E0B' }]
+                }
+            });
+        };
+
+        const renderRoiChart = () => {
+            const roiChartEl = document.getElementById('roiChart');
+            if (!roiChartEl) return;
+            if (chartInstances.roi) chartInstances.roi.destroy();
+            const ctx = roiChartEl.getContext('2d');
+            chartInstances.roi = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { label: 'Crypto & Finance', data: [{x: 65, y: 1.5}], backgroundColor: 'rgba(239, 68, 68, 0.8)', pointRadius: 8, pointHoverRadius: 10 },
+                        { label: 'Fitness', data: [{x: 45, y: 3}], backgroundColor: 'rgba(245, 158, 11, 0.8)', pointRadius: 8, pointHoverRadius: 10 },
+                        { label: 'Health & Beauty', data: [{x: 30, y: 4.5}], backgroundColor: 'rgba(59, 130, 246, 0.8)', pointRadius: 8, pointHoverRadius: 10 },
+                        { label: 'Tech / B2B', data: [{x: 10, y: 7}], backgroundColor: 'rgba(16, 185, 129, 0.8)', pointRadius: 8, pointHoverRadius: 10 }
+                    ]
+                },
+                options: {
+                    plugins: { legend: { display: true, position: 'bottom', labels: {font: {size: 10}} } },
+                    scales: {
+                        x: { title: { display: true, text: 'Manipulation Rate (%)', font: { size: 12, weight: 'bold' } }, min: 0, max: 80 },
+                        y: { title: { display: true, text: 'Campaign ROI (%)', font: { size: 12, weight: 'bold' } }, min: 0, max: 8 }
+                    }
+                }
+            });
+        };
+
+        function updateControls() {
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides) return;
+            
+            slides[currentSlideIndex].classList.remove('active');
+            
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+
+            progressBar.style.width = `${((currentSlideIndex + 1) / totalSlides) * 100}%`;
+
+            const titleEl = slides[currentSlideIndex].querySelector('h1, h2');
+            if (titleEl) {
+                ariaLiveRegion.textContent = `Now showing slide ${currentSlideIndex + 1} of ${totalSlides}: ${titleEl.textContent.trim()}`;
+            }
+
+            // Render charts for the report slide
+            setTimeout(() => {
+                if (slides[currentSlideIndex].id === 's6') { 
+                    renderSentimentChart();
+                    renderEmotionsChart();
+                    renderImpressionsChart();
+                    renderEngagementChart();
+                }
+                if (slides[currentSlideIndex].id === 's8') { // ROI chart for GTM slide
+                    renderRoiChart();
+                }
+            }, 50);
+            
+            updateControls();
+        }
+
+        const nextSlide = () => goToSlide(currentSlideIndex + 1);
+        const prevSlide = () => goToSlide(currentSlideIndex - 1);
+
+        // Event Listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { 
+                e.preventDefault(); 
+                if (currentSlideIndex < totalSlides - 1) nextSlide(); 
+            }
+            if (e.key === 'ArrowLeft') { 
+                e.preventDefault(); 
+                if (currentSlideIndex > 0) prevSlide();
+            }
+        });
+
+        document.getElementById('deck').addEventListener('click', (e) => {
+            if (!e.target.closest('a, button, input, textarea, canvas, video')) {
+                nextSlide();
+            }
+        });
+
+        // Initial setup
+        goToSlide(0);
     });
-
-    document.getElementById('deck').addEventListener('click', (e) => {
-        const tag = (e.target.tagName || '').toLowerCase();
-        if (['a','button','video'].includes(tag)) return;
-        next();
-    });
-
-    // Initial state
-    go(0);
 </script>
 </body>
 </html>
