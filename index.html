@@ -71,7 +71,7 @@
         #deck-container {
             width: 100%;
             height: 100%;
-            padding: 1.5rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
@@ -80,19 +80,22 @@
         #deck {
             flex-grow: 1;
             position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
         
         /* --- Slide Styles & Transitions --- */
         .slide {
             position: absolute;
             inset: 0;
-            padding: 2.5rem 3.5rem;
+            padding: 2rem 2.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.65);
+            background-color: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(24px);
             border-radius: var(--border-radius-lg);
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
@@ -101,6 +104,21 @@
             visibility: hidden;
             transform: translateY(20px) scale(0.98);
             transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out, visibility var(--transition-speed);
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        /* Responsive slide padding */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 1rem 1rem;
+            }
         }
 
         .slide.active {
@@ -154,20 +172,34 @@
 
         /* --- Components --- */
         .card {
-            background-color: rgba(249, 250, 251, 0.8);
+            background-color: rgba(249, 250, 251, 0.9);
             border: 1px solid #E5E7EB;
             border-radius: var(--border-radius-md);
-            padding: 2rem;
+            padding: 1.75rem;
             height: 100%;
             display: flex;
             flex-direction: column;
             text-align: left;
             transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        /* Responsive card padding */
+        @media (max-width: 768px) {
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.25rem;
+            }
         }
         
         .card h3 { 
@@ -269,6 +301,157 @@
             border-width: 0;
         }
 
+        /* --- Enhanced Grid System --- */
+        .slide-content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-grid {
+            display: grid;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .slide-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .slide-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .slide-grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .slide-grid-5 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        /* Responsive grid adjustments */
+        @media (max-width: 1024px) {
+            .slide-grid-5 {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            .slide-grid-4 {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-grid-2,
+            .slide-grid-3,
+            .slide-grid-4,
+            .slide-grid-5 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .slide-content {
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+            
+            .slide-spacing {
+                margin-top: 1.5rem;
+            }
+            
+            .slide-spacing-lg {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-grid-2,
+            .slide-grid-3,
+            .slide-grid-4,
+            .slide-grid-5 {
+                gap: 0.75rem;
+            }
+            
+            .slide-spacing {
+                margin-top: 1rem;
+            }
+            
+            .slide-spacing-lg {
+                margin-top: 1.5rem;
+            }
+        }
+
+        /* Content spacing utilities */
+        .slide-spacing {
+            margin-top: 2rem;
+        }
+
+        .slide-spacing-lg {
+            margin-top: 3rem;
+        }
+
+        /* Better content containers */
+        .content-section {
+            margin-bottom: 2rem;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Enhanced mobile typography */
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: clamp(2rem, 4vw, 2.5rem);
+                line-height: 1.2;
+            }
+            
+            .slide-subtitle {
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                margin: 0.75rem auto 0;
+            }
+            
+            .card h3 {
+                font-size: 1.25rem;
+            }
+            
+            .card h4 {
+                font-size: 1rem;
+            }
+            
+            .card p, .card li, .card span {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-title {
+                font-size: clamp(1.75rem, 3.5vw, 2rem);
+            }
+            
+            .slide-subtitle {
+                font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            }
+            
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .card p, .card li, .card span {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Improved scroll behavior */
+        .slide {
+            scroll-behavior: smooth;
+        }
+
+        /* Better focus states for accessibility */
+        .card:focus-within {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
     </style>
 </head>
 <body>
@@ -286,30 +469,38 @@
 
                 <!-- Slide 2: Our Mission & Why Now -->
                 <section id="s2" class="slide">
-                    <h2 class="slide-title animated-item">Our <span class="text-accent">Mission</span> & Why Now</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl mt-6">
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-4">What We Do</h3>
-                            <p class="text-lg text-secondary mb-4">We provide forensic-grade reports for project analysis and influencer marketing. Delivering verified and audited social engagement metrics with <strong class="text-primary">94% accuracy</strong>, helping brands reduce manipulated spend by up to <strong class="text-primary">67%</strong>.</p>
-                            
-                            <h3 class="text-2xl font-bold text-primary mb-4 mt-6">Why Now: The Shocking Reality</h3>
-                            <p class="text-lg text-secondary">Social media became the world's largest advertising channel in 2024 with <strong class="text-primary">$247.3B in global spend</strong>. Through our proprietary analysis of <strong class="text-primary">5 billion data points</strong> across Twitter, Reddit, and major platforms, we discovered the average influencer achieves <strong class="text-primary">less than 1% conversion rate</strong>—meaning <strong class="text-primary">99% waste on influencer spend</strong>.</p>
-                            <div class="mt-4 p-3 bg-accent/10 rounded-lg">
-                                <p class="text-sm font-semibold text-primary">*Analysis validated by Arizona State University audit of our koat.ai system</p>
+                    <div class="slide-content">
+                        <h2 class="slide-title animated-item">Our <span class="text-accent">Mission</span> & Why Now</h2>
+                        <div class="slide-grid slide-grid-2 slide-spacing">
+                            <div class="card animated-item">
+                                <div class="content-section">
+                                    <h3 class="text-2xl font-bold text-primary mb-4">What We Do</h3>
+                                    <p class="text-lg text-secondary mb-4">We provide forensic-grade reports for project analysis and influencer marketing. Delivering verified and audited social engagement metrics with <strong class="text-primary">94% accuracy</strong>, helping brands reduce manipulated spend by up to <strong class="text-primary">67%</strong>.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3 class="text-2xl font-bold text-primary mb-4">Why Now: The Shocking Reality</h3>
+                                    <p class="text-lg text-secondary">Social media became the world's largest advertising channel in 2024 with <strong class="text-primary">$247.3B in global spend</strong>. Through our proprietary analysis of <strong class="text-primary">5 billion data points</strong> across Twitter, Reddit, and major platforms, we discovered the average influencer achieves <strong class="text-primary">less than 1% conversion rate</strong>—meaning <strong class="text-primary">99% waste on influencer spend</strong>.</p>
+                                    <div class="mt-4 p-3 bg-accent/10 rounded-lg">
+                                        <p class="text-sm font-semibold text-primary">*Analysis validated by Arizona State University audit of our koat.ai system</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-4">Proven Results</h3>
-                            <ul class="text-lg text-secondary space-y-2">
-                                <li><strong class="text-primary">25 cents ROI</strong> for every dollar spent on typical influencer marketing</li>
-                                <li><strong class="text-primary">$890K fraud prevented</strong> for Fortune 500 financial client over 6 months</li>
-                                <li><strong class="text-primary">105% ROAS improvement</strong> (2.1x to 4.3x) through authentic influencer identification</li>
-                                <li><strong class="text-primary">$1.2M ARR committed</strong> from 12 active enterprise accounts</li>
-                                <li><strong class="text-primary">94% fraud detection accuracy</strong> vs. industry average of 60-70%</li>
-                            </ul>
-                            <div class="mt-6 p-4 bg-accent/10 rounded-lg">
-                                <p class="text-xl font-bold text-primary text-center">Our Promise: We replace vanity metrics with verifiable truth.</p>
+                            
+                            <div class="card animated-item">
+                                <div class="content-section">
+                                    <h3 class="text-2xl font-bold text-primary mb-4">Proven Results</h3>
+                                    <ul class="text-lg text-secondary space-y-2">
+                                        <li><strong class="text-primary">25 cents ROI</strong> for every dollar spent on typical influencer marketing</li>
+                                        <li><strong class="text-primary">$890K fraud prevented</strong> for Fortune 500 financial client over 6 months</li>
+                                        <li><strong class="text-primary">105% ROAS improvement</strong> (2.1x to 4.3x) through authentic influencer identification</li>
+                                        <li><strong class="text-primary">$1.2M ARR committed</strong> from 12 active enterprise accounts</li>
+                                        <li><strong class="text-primary">94% fraud detection accuracy</strong> vs. industry average of 60-70%</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 p-4 bg-accent/10 rounded-lg">
+                                    <p class="text-xl font-bold text-primary text-center">Our Promise: We replace vanity metrics with verifiable truth.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -317,83 +508,90 @@
 
                 <!-- Slide 3: The Market Problem -->
                 <section id="s3" class="slide">
-                    <h2 class="slide-title animated-item">The Market <span class="text-accent">Problem</span></h2>
-                    <p class="slide-subtitle animated-item">The digital marketing ecosystem is fundamentally broken, rewarding manipulation over authenticity.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl mt-6">
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-3">The Conversion Reality</h3>
-                            <div class="text-center p-4 bg-red-50/80 rounded-lg mb-4">
-                                <p class="text-5xl font-bold text-red-600">0.1%-10%</p>
-                                <p class="text-lg font-semibold text-secondary">Average Influencer Conversion Rate</p>
-                                <p class="text-sm text-secondary italic">From 5B data points analyzed via koat.ai</p>
-                            </div>
-                            <p class="text-lg text-secondary mb-4">Through our proprietary analysis across Twitter, Reddit, and major platforms, <strong class="text-primary">we have never observed conversion rates above 10%</strong> across any influencer campaigns, with most performing at 0.1% or lower.</p>
-                            
-                            <div class="bg-accent/10 p-3 rounded-lg">
-                                <h4 class="text-lg font-bold text-primary mb-2">The Waste Crisis</h4>
-                                <ul class="text-base text-secondary space-y-1">
-                                    <li>• <strong class="text-primary">$57B global market</strong></li>
-                                    <li>• At 10% effectiveness: <strong class="text-primary">$5.7B actual value</strong></li>
-                                    <li>• <strong class="text-primary">$51.3B+ wasted annually</strong> on bot engagement</li>
-                                </ul>
-                            </div>
-                            <p class="text-sm text-accent mt-2 italic">*Validated by Arizona State University audit</p>
-                        </div>
+                    <div class="slide-content">
+                        <h2 class="slide-title animated-item">The Market <span class="text-accent">Problem</span></h2>
+                        <p class="slide-subtitle animated-item">The digital marketing ecosystem is fundamentally broken, rewarding manipulation over authenticity.</p>
                         
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-3">The Manual Analysis Problem</h3>
-                            <p class="text-lg text-secondary mb-4">Current solutions are manual, time-intensive, and costly:</p>
+                        <div class="slide-grid slide-grid-2 slide-spacing">
+                            <div class="card animated-item">
+                                <div class="content-section">
+                                    <h3 class="text-2xl font-bold text-primary mb-3">The Conversion Reality</h3>
+                                    <div class="text-center p-4 bg-red-50/80 rounded-lg mb-4">
+                                        <p class="text-5xl font-bold text-red-600">0.1%-10%</p>
+                                        <p class="text-lg font-semibold text-secondary">Average Influencer Conversion Rate</p>
+                                        <p class="text-sm text-secondary italic">From 5B data points analyzed via koat.ai</p>
+                                    </div>
+                                    <p class="text-lg text-secondary mb-4">Through our proprietary analysis across Twitter, Reddit, and major platforms, <strong class="text-primary">we have never observed conversion rates above 10%</strong> across any influencer campaigns, with most performing at 0.1% or lower.</p>
+                                    
+                                    <div class="bg-accent/10 p-3 rounded-lg">
+                                        <h4 class="text-lg font-bold text-primary mb-2">The Waste Crisis</h4>
+                                        <ul class="text-base text-secondary space-y-1">
+                                            <li>• <strong class="text-primary">$57B global market</strong></li>
+                                            <li>• At 10% effectiveness: <strong class="text-primary">$5.7B actual value</strong></li>
+                                            <li>• <strong class="text-primary">$51.3B+ wasted annually</strong> on bot engagement</li>
+                                        </ul>
+                                    </div>
+                                    <p class="text-sm text-accent mt-2 italic">*Validated by Arizona State University audit</p>
+                                </div>
+                            </div>
                             
-                            <div class="bg-red-50/80 p-4 rounded-lg mb-4">
-                                <h4 class="text-lg font-semibold text-primary mb-2">Manual Validation Cost Example</h4>
-                                <div class="space-y-2 text-base text-secondary">
-                                    <p><strong class="text-primary">Scenario:</strong> 10M follower influencer analysis</p>
-                                    <p><strong class="text-primary">Time per account:</strong> 20 seconds manual validation</p>
-                                    <p><strong class="text-primary">Required analysts:</strong> 100 social analysts @ $50/hour</p>
-                                    <div class="text-center p-2 bg-white rounded mt-3">
-                                        <p class="text-xl font-bold text-red-600">Total Cost: $2.78M</p>
-                                        <p class="text-lg font-bold text-red-600">Total Time: 55,555 hours</p>
-                                        <p class="text-sm text-secondary">Per influencer analysis</p>
+                            <div class="card animated-item">
+                                <div class="content-section">
+                                    <h3 class="text-2xl font-bold text-primary mb-3">The Manual Analysis Problem</h3>
+                                    <p class="text-lg text-secondary mb-4">Current solutions are manual, time-intensive, and costly:</p>
+                                    
+                                    <div class="bg-red-50/80 p-4 rounded-lg mb-4">
+                                        <h4 class="text-lg font-semibold text-primary mb-2">Manual Validation Cost Example</h4>
+                                        <div class="space-y-2 text-base text-secondary">
+                                            <p><strong class="text-primary">Scenario:</strong> 10M follower influencer analysis</p>
+                                            <p><strong class="text-primary">Time per account:</strong> 20 seconds manual validation</p>
+                                            <p><strong class="text-primary">Required analysts:</strong> 100 social analysts @ $50/hour</p>
+                                            <div class="text-center p-2 bg-white rounded mt-3">
+                                                <p class="text-xl font-bold text-red-600">Total Cost: $2.78M</p>
+                                                <p class="text-lg font-bold text-red-600">Total Time: 55,555 hours</p>
+                                                <p class="text-sm text-secondary">Per influencer analysis</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-green-50/80 p-4 rounded-lg">
+                                        <h4 class="text-lg font-semibold text-primary mb-2">SocialAudits Solution</h4>
+                                        <div class="text-center p-2 bg-white rounded">
+                                            <p class="text-xl font-bold text-green-600">Our System: 10 seconds</p>
+                                            <p class="text-lg font-bold text-green-600">Cost: $50-$500</p>
+                                            <p class="text-sm text-secondary">Same 10M follower analysis</p>
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <p class="text-2xl font-bold text-primary">99.98% Cost Savings</p>
+                                            <p class="text-lg font-bold text-primary">20,000x Speed Improvement</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="bg-green-50/80 p-4 rounded-lg">
-                                <h4 class="text-lg font-semibold text-primary mb-2">SocialAudits Solution</h4>
-                                <div class="text-center p-2 bg-white rounded">
-                                    <p class="text-xl font-bold text-green-600">Our System: 10 seconds</p>
-                                    <p class="text-lg font-bold text-green-600">Cost: $50-$500</p>
-                                    <p class="text-sm text-secondary">Same 10M follower analysis</p>
-                                </div>
-                                <div class="mt-3 text-center">
-                                    <p class="text-2xl font-bold text-primary">99.98% Cost Savings</p>
-                                    <p class="text-lg font-bold text-primary">20,000x Speed Improvement</p>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <div class="card max-w-4xl mx-auto">
-                            <h3 class="text-2xl font-bold text-primary mb-3 text-center">Why Brands Are Stuck in This Broken System</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-primary mb-2">Pain Points Brands Face:</h4>
-                                    <ul class="text-base text-secondary space-y-1">
-                                        <li>• <strong class="text-primary">Massive time loss</strong> on manual validation</li>
-                                        <li>• <strong class="text-primary">Prohibitive costs</strong> for proper analysis</li>
-                                        <li>• <strong class="text-primary">No real-time insights</strong> for campaign optimization</li>
-                                        <li>• <strong class="text-primary">Zero conversion tracking</strong> across campaigns</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-semibold text-primary mb-2">The Result:</h4>
-                                    <ul class="text-base text-secondary space-y-1">
-                                        <li>• Brands rely on vanity metrics instead</li>
-                                        <li>• 90%-99.9% of spend goes to waste</li>
-                                        <li>• No way to identify the converting 1%</li>
-                                        <li>• Industry stuck in massive inefficiency cycle</li>
-                                    </ul>
+                        
+                        <div class="slide-spacing">
+                            <div class="card max-w-4xl mx-auto">
+                                <h3 class="text-2xl font-bold text-primary mb-3 text-center">Why Brands Are Stuck in This Broken System</h3>
+                                <div class="slide-grid slide-grid-2">
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-primary mb-2">Pain Points Brands Face:</h4>
+                                        <ul class="text-base text-secondary space-y-1">
+                                            <li>• <strong class="text-primary">Massive time loss</strong> on manual validation</li>
+                                            <li>• <strong class="text-primary">Prohibitive costs</strong> for proper analysis</li>
+                                            <li>• <strong class="text-primary">No real-time insights</strong> for campaign optimization</li>
+                                            <li>• <strong class="text-primary">Zero conversion tracking</strong> across campaigns</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-primary mb-2">The Result:</h4>
+                                        <ul class="text-base text-secondary space-y-1">
+                                            <li>• Brands rely on vanity metrics instead</li>
+                                            <li>• 90%-99.9% of spend goes to waste</li>
+                                            <li>• No way to identify the converting 1%</li>
+                                            <li>• Industry stuck in massive inefficiency cycle</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -402,50 +600,75 @@
 
                 <!-- Slide 4: Video Demo -->
                 <section id="s4" class="slide">
-                    <h2 class="slide-title mb-6 animated-item">Vanity metrics are <span class="text-accent">easier to utilize</span> than ever.</h2>
-                    <p class="slide-subtitle mb-8 animated-item">The following is a real screen recording of how easily influence can be purchased.</p>
-                    <div class="w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl border-2 border-gray-200 animated-item" style="aspect-ratio: 16/9; background:black;">
-                        <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/1D243D/FFFFFF?text=Click+to+Play+Demo">
-                            <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20(1).mov" type="video/mp4" />
-                            <track kind="captions" srclang="en" label="English captions" default>
-                            Your browser does not support the video tag.
-                        </video>
+                    <div class="slide-content">
+                        <h2 class="slide-title mb-6 animated-item">Vanity metrics are <span class="text-accent">easier to utilize</span> than ever.</h2>
+                        <p class="slide-subtitle mb-8 animated-item">The following is a real screen recording of how easily influence can be purchased.</p>
+                        
+                        <div class="slide-spacing">
+                            <div class="w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-gray-200 animated-item" style="aspect-ratio: 16/9; background:black;">
+                                <video controls class="w-full h-full" poster="https://placehold.co/1920x1080/1D243D/FFFFFF?text=Click+to+Play+Demo">
+                                    <source src="https://updatedcardscript.standard.us-east-1.oortstorages.com/anotherinfluencer%20(1).mov" type="video/mp4" />
+                                    <track kind="captions" srclang="en" label="English captions" default>
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
+                        <p class="text-xl text-primary font-semibold mt-4 animated-item">Key Insight: What takes fraudsters minutes to purchase takes brands weeks to detect—until now.</p>
                     </div>
-                    <p class="text-xl text-primary font-semibold mt-4 animated-item">Key Insight: What takes fraudsters minutes to purchase takes brands weeks to detect—until now.</p>
                 </section>
 
                 <!-- Slide 5: Our Exclusive Pipeline -->
                 <section id="s5" class="slide">
-                    <h2 class="slide-title mb-4 animated-item">Our Exclusive <span class="text-accent">Pipeline</span></h2>
-                    <p class="slide-subtitle mb-8 animated-item">The only system built on 5 billion analyzed data points, validated by Arizona State University, and proven to identify true conversion rates.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto w-full">
-                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">1. Proprietary Data</h3><p class="text-lg text-secondary">Exclusive access via koat.ai to 5 billion analyzed data points across 15+ platforms including Twitter, Reddit, Instagram, TikTok</p></div>
-                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">2. Academic Validation</h3><p class="text-lg text-secondary">System audited and validated by Arizona State University researchers for methodology and accuracy</p></div>
-                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">3. Conversion Tracking</h3><p class="text-lg text-secondary">Proprietary algorithms track true conversion rates—the metric that matters most but that no one else measures at scale</p></div>
-                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">4. Real-Time Analysis</h3><p class="text-lg text-secondary">AI-powered behavioral pattern analysis identifies manipulation before campaigns go live</p></div>
-                        <div class="card p-4 animated-item"><h3 class="text-xl font-bold text-primary mb-1">5. Forensic Delivery</h3><p class="text-lg text-secondary">24-48 hour forensic-grade reports with true conversion predictions and manipulation scores</p></div>
-                    </div>
-                    <div class="mt-8 max-w-4xl mx-auto">
-                        <div class="card p-6">
-                            <h3 class="text-2xl font-bold text-primary mb-3 text-center">The Competitive Moat</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-primary mb-2">What Everyone Else Measures:</h4>
-                                    <ul class="text-base text-secondary space-y-1">
-                                        <li>• Likes, comments, shares</li>
-                                        <li>• Follower counts and growth</li>
-                                        <li>• Basic engagement rates</li>
-                                        <li>• Surface-level bot detection</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-semibold text-primary mb-2">What SocialAudits Measures:</h4>
-                                    <ul class="text-base text-secondary space-y-1">
-                                        <li>• <strong class="text-primary">True conversion rates</strong> (&lt;1% industry reality)</li>
-                                        <li>• <strong class="text-primary">Attribution to actual sales</strong></li>
-                                        <li>• <strong class="text-primary">Behavioral authenticity</strong> patterns</li>
-                                        <li>• <strong class="text-primary">Predictive performance</strong> modeling</li>
-                                    </ul>
+                    <div class="slide-content">
+                        <h2 class="slide-title mb-4 animated-item">Our Exclusive <span class="text-accent">Pipeline</span></h2>
+                        <p class="slide-subtitle mb-8 animated-item">The only system built on 5 billion analyzed data points, validated by Arizona State University, and proven to identify true conversion rates.</p>
+                        
+                        <div class="slide-grid slide-grid-5 slide-spacing">
+                            <div class="card p-4 animated-item">
+                                <h3 class="text-xl font-bold text-primary mb-1">1. Proprietary Data</h3>
+                                <p class="text-lg text-secondary">Exclusive access via koat.ai to 5 billion analyzed data points across 15+ platforms including Twitter, Reddit, Instagram, TikTok</p>
+                            </div>
+                            <div class="card p-4 animated-item">
+                                <h3 class="text-xl font-bold text-primary mb-1">2. Academic Validation</h3>
+                                <p class="text-lg text-secondary">System audited and validated by Arizona State University researchers for methodology and accuracy</p>
+                            </div>
+                            <div class="card p-4 animated-item">
+                                <h3 class="text-xl font-bold text-primary mb-1">3. Conversion Tracking</h3>
+                                <p class="text-lg text-secondary">Proprietary algorithms track true conversion rates—the metric that matters most but that no one else measures at scale</p>
+                            </div>
+                            <div class="card p-4 animated-item">
+                                <h3 class="text-xl font-bold text-primary mb-1">4. Real-Time Analysis</h3>
+                                <p class="text-lg text-secondary">AI-powered behavioral pattern analysis identifies manipulation before campaigns go live</p>
+                            </div>
+                            <div class="card p-4 animated-item">
+                                <h3 class="text-xl font-bold text-primary mb-1">5. Forensic Delivery</h3>
+                                <p class="text-lg text-secondary">24-48 hour forensic-grade reports with true conversion predictions and manipulation scores</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-spacing-lg">
+                            <div class="card p-6 max-w-4xl mx-auto">
+                                <h3 class="text-2xl font-bold text-primary mb-3 text-center">The Competitive Moat</h3>
+                                <div class="slide-grid slide-grid-2">
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-primary mb-2">What Everyone Else Measures:</h4>
+                                        <ul class="text-base text-secondary space-y-1">
+                                            <li>• Likes, comments, shares</li>
+                                            <li>• Follower counts and growth</li>
+                                            <li>• Basic engagement rates</li>
+                                            <li>• Surface-level bot detection</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-primary mb-2">What SocialAudits Measures:</h4>
+                                        <ul class="text-base text-secondary space-y-1">
+                                            <li>• <strong class="text-primary">True conversion rates</strong> (&lt;1% industry reality)</li>
+                                            <li>• <strong class="text-primary">Attribution to actual sales</strong></li>
+                                            <li>• <strong class="text-primary">Behavioral authenticity</strong> patterns</li>
+                                            <li>• <strong class="text-primary">Predictive performance</strong> modeling</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -511,37 +734,41 @@
 
                 <!-- Slide 7: Our Target Markets (Refined) -->
                 <section id="s7" class="slide">
-                    <h2 class="slide-title animated-item">Our Target <span class="text-accent">Markets</span> – Focusing on the 1%</h2>
-                    <p class="slide-subtitle animated-item">We target high-compliance, high-stakes verticals where identifying the 1% of effective influencers delivers immediate ROI.</p>
-                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mt-6">
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-2">Finance & Crypto</h3>
-                            <p class="text-xl font-semibold text-accent mb-4">TAM: $1.1B+</p>
-                            <p class="text-lg text-secondary"><strong class="text-primary">Why it's ripe:</strong> Reputation is paramount. A single instance of manipulated hype can trigger regulatory scrutiny and irreversible brand damage. High-stakes environment where finding the 1% of authentic influencers is critical.</p>
+                    <div class="slide-content">
+                        <h2 class="slide-title animated-item">Our Target <span class="text-accent">Markets</span> – Focusing on the 1%</h2>
+                        <p class="slide-subtitle animated-item">We target high-compliance, high-stakes verticals where identifying the 1% of effective influencers delivers immediate ROI.</p>
+                        
+                        <div class="slide-grid slide-grid-3 slide-spacing">
+                            <div class="card animated-item">
+                                <h3 class="text-2xl font-bold text-primary mb-2">Finance & Crypto</h3>
+                                <p class="text-xl font-semibold text-accent mb-4">TAM: $1.1B+</p>
+                                <p class="text-lg text-secondary"><strong class="text-primary">Why it's ripe:</strong> Reputation is paramount. A single instance of manipulated hype can trigger regulatory scrutiny and irreversible brand damage. High-stakes environment where finding the 1% of authentic influencers is critical.</p>
+                            </div>
+                            <div class="card animated-item">
+                                <h3 class="text-2xl font-bold text-primary mb-2">Health & Beauty</h3>
+                                <p class="text-xl font-semibold text-accent mb-4">TAM: $1.6B+</p>
+                                <p class="text-lg text-secondary"><strong class="text-primary">Why expanding:</strong> Brand loyalty is fragile and built on consumer trust. The 90%-99.9% waste problem is catastrophic for beauty brands that depend on authentic recommendations.</p>
+                            </div>
+                            <div class="card animated-item">
+                                <h3 class="text-2xl font-bold text-primary mb-2">Fitness</h3>
+                                <p class="text-xl font-semibold text-accent mb-4">TAM: $1B+</p>
+                                <p class="text-lg text-secondary"><strong class="text-primary">Why strategic:</strong> The micro-influencer space has exploded with zero quality control. Fitness brands desperately need to identify the 1% of influencers who actually drive conversions vs. engagement.</p>
+                            </div>
                         </div>
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-2">Health & Beauty</h3>
-                            <p class="text-xl font-semibold text-accent mb-4">TAM: $1.6B+</p>
-                            <p class="text-lg text-secondary"><strong class="text-primary">Why expanding:</strong> Brand loyalty is fragile and built on consumer trust. The 90%-99.9% waste problem is catastrophic for beauty brands that depend on authentic recommendations.</p>
-                        </div>
-                        <div class="card animated-item">
-                            <h3 class="text-2xl font-bold text-primary mb-2">Fitness</h3>
-                             <p class="text-xl font-semibold text-accent mb-4">TAM: $1B+</p>
-                            <p class="text-lg text-secondary"><strong class="text-primary">Why strategic:</strong> The micro-influencer space has exploded with zero quality control. Fitness brands desperately need to identify the 1% of influencers who actually drive conversions vs. engagement.</p>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <div class="card max-w-4xl mx-auto">
-                            <h3 class="text-2xl font-bold text-primary mb-3">Our Strategy: Focus on the 1%</h3>
-                            <p class="text-lg text-secondary">While competitors help brands optimize campaigns across all influencers, we help them <strong class="text-primary">identify and invest exclusively in the 1% of influencers who actually convert</strong>. This creates dramatically higher ROI by eliminating the 90%-99.9% waste that plagues the industry.</p>
-                            <div class="mt-4 grid grid-cols-2 gap-4">
-                                <div class="text-center">
-                                    <p class="text-3xl font-bold text-red-600">$51.3B+</p>
-                                    <p class="text-sm text-secondary">Annual waste across verticals</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-3xl font-bold text-green-600">$3.65B</p>
-                                    <p class="text-sm text-secondary">Addressable opportunity (combined TAM)</p>
+                        
+                        <div class="slide-spacing">
+                            <div class="card max-w-4xl mx-auto text-center">
+                                <h3 class="text-2xl font-bold text-primary mb-3">Our Strategy: Focus on the 1%</h3>
+                                <p class="text-lg text-secondary">While competitors help brands optimize campaigns across all influencers, we help them <strong class="text-primary">identify and invest exclusively in the 1% of influencers who actually convert</strong>. This creates dramatically higher ROI by eliminating the 90%-99.9% waste that plagues the industry.</p>
+                                <div class="slide-grid slide-grid-2 mt-4">
+                                    <div class="text-center">
+                                        <p class="text-3xl font-bold text-red-600">$51.3B+</p>
+                                        <p class="text-sm text-secondary">Annual waste across verticals</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-3xl font-bold text-green-600">$3.65B</p>
+                                        <p class="text-sm text-secondary">Addressable opportunity (combined TAM)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -610,15 +837,15 @@
                     </div>
                 </section>
 
-                <!-- Slide 9: Launch Strategy -->
+                <!-- Slide 9: Launch Partner & Distribution -->
                 <section id="s9" class="slide">
-                    <h2 class="slide-title animated-item">Launch <span class="text-accent">Strategy</span></h2>
-                    <p class="slide-subtitle animated-item">Our GTM is accelerated by a strategic partnership providing immediate, exclusive distribution.</p>
+                    <h2 class="slide-title animated-item">Launch <span class="text-accent">Partner</span> & Distribution</h2>
+                    <p class="slide-subtitle animated-item">Strategic partnership providing immediate market access and credibility.</p>
                     <div class="card w-full max-w-6xl mt-6 animated-item">
                          <h3 class="text-2xl font-bold text-primary mb-4 text-center">Solvent Labs & The Solana Ecosystem</h3>
                          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                              <div>
-                                 <p class="text-lg text-secondary mb-4">Our partnership with Solvent Labs makes us the exclusive ad partner on the new Solana phone, with ads played between games on Solvent—turning a critical need into a powerful, low-cost acquisition channel.</p>
+                                 <p class="text-lg text-secondary mb-4">Our exclusive partnership with Solvent Labs makes us the fraud detection partner for the Solana phone ecosystem, providing:</p>
                                  <ul class="text-base text-secondary space-y-2">
                                      <li>• <strong class="text-primary">Immediate Distribution:</strong> Pre-installed fraud detection for Solana phone users</li>
                                      <li>• <strong class="text-primary">Credibility:</strong> Association with established crypto infrastructure</li>
